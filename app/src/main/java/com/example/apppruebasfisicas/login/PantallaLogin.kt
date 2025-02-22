@@ -11,7 +11,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.window.Dialog
 import com.example.apppruebasfisicas.componentes.Boton
+import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.CuadroTextoPass
 import com.example.apppruebasfisicas.componentes.Titulo
@@ -22,6 +24,8 @@ fun PantallaLogin(){
     Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         var textoUsuario by rememberSaveable { mutableStateOf("") }
         var textoPass by rememberSaveable { mutableStateOf("") }
+        var correctoDatos by rememberSaveable { mutableStateOf(false) }
+        var incorrectoDatos by rememberSaveable { mutableStateOf(false) }
 
         Spacer(modifier = Modifier.weight(1f))
         Titulo("Página de Login")
@@ -33,10 +37,24 @@ fun PantallaLogin(){
         CuadroTextoPass(textoPass, "Introduzca su contraseña") { textoPass = it }
         Spacer(modifier = Modifier.weight(1f))
 
-        Boton("Iniciar Sesion") {
 
+
+        Boton("Iniciar Sesion") {
+            if (textoUsuario.isEmpty() && textoPass.isEmpty()) {
+                incorrectoDatos = true
+            }else{
+                correctoDatos = true
+            }
         }
         Spacer(modifier = Modifier.weight(1f))
+
+        if(incorrectoDatos){
+            CuadroDialogo("Fallo en el inicio de sesion, los datos son incorrectos", { incorrectoDatos = false }, { incorrectoDatos = false })
+        }
+
+        if (correctoDatos){
+            CuadroDialogo("Datos correctos", { correctoDatos = false }, { correctoDatos = false })
+        }
 
     }
 }
