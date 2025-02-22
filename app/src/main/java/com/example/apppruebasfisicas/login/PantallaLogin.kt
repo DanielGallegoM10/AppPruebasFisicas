@@ -18,9 +18,8 @@ import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.CuadroTextoPass
 import com.example.apppruebasfisicas.componentes.Titulo
 
-@Preview(showBackground = true)
 @Composable
-fun PantallaLogin(){
+fun PantallaLogin(navigateToPrincipal: () -> Unit){
     Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         var textoUsuario by rememberSaveable { mutableStateOf("") }
         var textoPass by rememberSaveable { mutableStateOf("") }
@@ -40,7 +39,7 @@ fun PantallaLogin(){
 
 
         Boton("Iniciar Sesion") {
-            if (textoUsuario.isEmpty() && textoPass.isEmpty()) {
+            if (textoUsuario.isEmpty() || textoPass.isEmpty()) {
                 incorrectoDatos = true
             }else{
                 correctoDatos = true
@@ -53,7 +52,7 @@ fun PantallaLogin(){
         }
 
         if (correctoDatos){
-            CuadroDialogo("Datos correctos", { correctoDatos = false }, { correctoDatos = false })
+            CuadroDialogo("Datos correctos", { correctoDatos = false }, { navigateToPrincipal() })
         }
 
     }

@@ -1,5 +1,6 @@
 package com.example.apppruebasfisicas
 
+import NavegacionPrincipal
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppPruebasFisicasTheme {
-
+                NavegacionPrincipal()
             }
         }
     }

@@ -33,7 +33,7 @@ fun PantallaPrincipal() {
         var peso by rememberSaveable { mutableStateOf("") }
         var altura by rememberSaveable { mutableStateOf("") }
         var textoSexo by rememberSaveable { mutableStateOf("") }
-        var imc by rememberSaveable { mutableStateOf("") }
+        var imcTexto by rememberSaveable { mutableStateOf("") }
 
         Spacer(modifier = Modifier.weight(1f))
         Row(
@@ -43,7 +43,19 @@ fun PantallaPrincipal() {
             Spacer(modifier = Modifier.weight(1f))
             Boton("Ver Notas") { }
             Spacer(modifier = Modifier.weight(1f))
-            Boton("Calcular IMC") { dialogoImc = true }
+            Boton("Calcular IMC") {
+                val pesoValor = peso.toFloatOrNull()
+                val alturaValor = altura.toFloatOrNull()
+                if (pesoValor != null && alturaValor != null && pesoValor > 0 && alturaValor > 0) {
+                    val alturaEnMetros = alturaValor / 100
+                    val imc = pesoValor / (alturaEnMetros * alturaEnMetros)
+                    imcTexto = "Su IMC es de: %.2f".format(imc)
+                    dialogoImc = true
+                } else {
+                    imcTexto = "Introduzca valores validos"
+                    dialogoImc = true
+                }
+            }
             Spacer(modifier = Modifier.weight(1f))
         }
         Spacer(modifier = Modifier.weight(1f))
@@ -60,17 +72,11 @@ fun PantallaPrincipal() {
 
 
         Spacer(modifier = Modifier.weight(1f))
-        Boton("Continuar") {  }
+        Boton("Continuar") { }
         Spacer(modifier = Modifier.weight(1f))
 
-        imc = peso.toInt() / (altura.toInt() * altura.toInt())
-
         if (dialogoImc) {
-            CuadroDialogo("Su IMC es de: $imc", { dialogoImc = false }, { dialogoImc = false })
+            CuadroDialogo(imcTexto, { dialogoImc = false }, { dialogoImc = false })
         }
-
-
     }
-
-
 }
