@@ -10,13 +10,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
+import com.example.apppruebasfisicas.BDD.LoginHelper
 import com.example.apppruebasfisicas.componentes.Boton
 import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.CuadroTextoPass
 import com.example.apppruebasfisicas.componentes.Titulo
+import com.example.apppruebasfisicas.entidades.LoginObj
 
 @Composable
 fun PantallaLogin(navigateToPrincipal: () -> Unit){
@@ -25,6 +28,12 @@ fun PantallaLogin(navigateToPrincipal: () -> Unit){
         var textoPass by rememberSaveable { mutableStateOf("") }
         var correctoDatos by rememberSaveable { mutableStateOf(false) }
         var incorrectoDatos by rememberSaveable { mutableStateOf(false) }
+
+        val context = LocalContext.current
+
+        val loginHelper = LoginHelper(context)
+
+        var usuarioEncontrado: LoginObj? = null
 
         Spacer(modifier = Modifier.weight(1f))
         Titulo("Página de Login")
@@ -36,13 +45,16 @@ fun PantallaLogin(navigateToPrincipal: () -> Unit){
         CuadroTextoPass(textoPass, "Introduzca su contraseña") { textoPass = it }
         Spacer(modifier = Modifier.weight(1f))
 
-
-
         Boton("Iniciar Sesion") {
             if (textoUsuario.isEmpty() || textoPass.isEmpty()) {
                 incorrectoDatos = true
             }else{
-                correctoDatos = true
+                usuarioEncontrado = loginHelper.getUsuario(textoUsuario, textoPass)
+                if (usuarioEncontrado == null) {
+                    incorrectoDatos = true
+                }else{
+                    correctoDatos = true
+                }
             }
         }
         Spacer(modifier = Modifier.weight(1f))

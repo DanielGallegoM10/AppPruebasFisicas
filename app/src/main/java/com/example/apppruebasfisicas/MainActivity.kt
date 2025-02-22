@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.apppruebasfisicas.BDD.BDDPruebasFisicas
 import com.example.apppruebasfisicas.ui.theme.AppPruebasFisicasTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,6 +21,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppPruebasFisicasTheme {
+                val bdd = BDDPruebasFisicas(this)
+                val db = bdd.writableDatabase
+                bdd.onUpgrade(db, 0, 0)
                 NavegacionPrincipal()
             }
         }
