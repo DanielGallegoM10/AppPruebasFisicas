@@ -19,7 +19,9 @@ fun NavegacionPrincipal() {
             }
         }
         composable<Principal> {
-            PantallaPrincipal()
+            PantallaPrincipal(
+                navigateToBack = { navController.navigate(Login){ popUpTo(Login) { inclusive = true } } }
+            )
         }
     }
 }

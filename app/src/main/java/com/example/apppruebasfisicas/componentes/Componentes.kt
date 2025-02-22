@@ -1,12 +1,18 @@
 package com.example.apppruebasfisicas.componentes
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -114,6 +120,17 @@ fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit){
         }
     }
 
+}
+
+@Composable
+fun IconoVolver(navigateToBack: () -> Unit){
+    Icon(
+        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+        contentDescription = "Volver",
+        modifier = Modifier.padding(10.dp)
+            .size(30.dp)
+            .clickable { navigateToBack() }
+    )
 }
 
 @Preview(showBackground = true)
