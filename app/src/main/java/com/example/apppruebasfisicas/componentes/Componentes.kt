@@ -175,11 +175,18 @@ fun ElementoPrueba(pruebaFisica: PruebaFisicaObj, onItemSelected: (PruebaFisicaO
 
 @Composable
 fun ListaDePruebas(){
+
     LazyColumn(
 
     ) {
 
     }
+}
+
+fun getPruebasFisicas(): List<PruebaFisicaObj> {
+    return listOf(
+
+    )
 }
 
 @Preview(showBackground = true)
