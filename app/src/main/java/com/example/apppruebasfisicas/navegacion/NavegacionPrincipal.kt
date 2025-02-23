@@ -3,6 +3,8 @@ import androidx.navigation.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.toRoute
+import com.example.apppruebasfisicas.entidades.LoginObj
 import com.example.apppruebasfisicas.login.PantallaLogin
 import com.example.apppruebasfisicas.navegacion.Login
 import com.example.apppruebasfisicas.navegacion.Principal
@@ -18,9 +20,17 @@ fun NavegacionPrincipal() {
                 navController.navigate(Principal)
             }
         }
-        composable<Principal> {
+        composable<Principal> { backStackEntry ->
+            val usuario: LoginObj = backStackEntry.toRoute()
             PantallaPrincipal(
-                navigateToBack = { navController.navigate(Login){ popUpTo(Login) { inclusive = true } } }
+                idUsuario = usuario.id,
+                navigateToBack = {
+                    navController.navigate(Login) {
+                        popUpTo(Login) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
     }

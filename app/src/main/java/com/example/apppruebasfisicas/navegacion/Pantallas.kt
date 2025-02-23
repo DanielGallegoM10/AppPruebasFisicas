@@ -7,3 +7,6 @@ object Login
 
 @Serializable
 object Principal
+
+@Serializable
+object PruebasFisicas

@@ -1,5 +1,7 @@
 package com.example.apppruebasfisicas.componentes
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,11 +9,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -24,6 +29,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -33,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.apppruebasfisicas.entidades.PruebaFisicaObj
 
 @Composable
 fun CuadroTexto(texto: String, labelName: String, onValueChange: (String) -> Unit) {
@@ -133,9 +142,49 @@ fun IconoVolver(navigateToBack: () -> Unit){
     )
 }
 
+@Composable
+fun ElementoPrueba(pruebaFisica: PruebaFisicaObj, onItemSelected: (PruebaFisicaObj) -> Unit, onUrlClick: () -> Unit){
+    Card(
+        border = BorderStroke(2.dp, Color.Cyan),
+        modifier = Modifier.width(200.dp)
+            .clickable { onItemSelected(pruebaFisica) }
+    ) {
+        Column{
+            Image(
+                painter = painterResource(id = pruebaFisica.imagen),
+                contentDescription = "Imagen Prueba",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                text = pruebaFisica.nombre,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = pruebaFisica.url,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+                    .clickable { onUrlClick() },
+                fontSize = 15.sp,
+                color = Color.Blue
+            )
+        }
+    }
+}
+
+@Composable
+fun ListaDePruebas(){
+    LazyColumn(
+
+    ) {
+
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewComponents(){
 //    Titulo("Pagina de Login")
-    CuadroDialogo("Mensaje de confirmacion", {}, {})
+//    CuadroDialogo("Mensaje de confirmacion", {}, {})
 }

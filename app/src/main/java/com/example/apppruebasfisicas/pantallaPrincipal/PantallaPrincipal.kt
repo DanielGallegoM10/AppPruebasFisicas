@@ -19,17 +19,20 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.apppruebasfisicas.BDD.DatosHelper
 import com.example.apppruebasfisicas.componentes.Boton
 import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.IconoVolver
 import com.example.apppruebasfisicas.componentes.RadioButtomSexo
+import com.example.apppruebasfisicas.entidades.DatosObj
 
 //@Preview(showBackground = true)
 @Composable
-fun PantallaPrincipal(navigateToBack: () -> Unit) {
+fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit) {
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -41,7 +44,9 @@ fun PantallaPrincipal(navigateToBack: () -> Unit) {
             Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val datosHelper: DatosHelper = DatosHelper(LocalContext.current)
             var dialogoImc by rememberSaveable { mutableStateOf(false) }
+            var dialogoErrorDatos by rememberSaveable { mutableStateOf(false) }
             var edad by rememberSaveable { mutableStateOf("") }
             var peso by rememberSaveable { mutableStateOf("") }
             var altura by rememberSaveable { mutableStateOf("") }
@@ -85,11 +90,30 @@ fun PantallaPrincipal(navigateToBack: () -> Unit) {
 
 
             Spacer(modifier = Modifier.weight(1f))
-            Boton("Continuar") { }
+            Boton("Continuar") {
+                if (edad.isEmpty() || peso.isEmpty() || altura.isEmpty() || textoSexo.isEmpty()) {
+                    dialogoErrorDatos = true
+                } else {
+                    val datosObj = DatosObj(idUsuario, edad.toInt(), peso.toInt(), altura.toInt(), textoSexo)
+
+                    // Verificar si el usuario ya tiene datos guardados
+                    val datosExistentes = datosHelper.obtenerDatosPorUsuario(idUsuario)
+
+                    if (datosExistentes != null) {
+                        datosObj.id = datosExistentes.id
+                        datosHelper.actualizarDatos(datosObj)
+                    } else {
+                        datosHelper.guardarDatos(datosObj)
+                    }
+                }
+            }
             Spacer(modifier = Modifier.weight(1f))
 
             if (dialogoImc) {
                 CuadroDialogo(imcTexto, { dialogoImc = false }, { dialogoImc = false })
+            }
+            if (dialogoErrorDatos) {
+                CuadroDialogo("ERROR, alguno de los datos no ha sido introducido", { dialogoErrorDatos = false }, { dialogoErrorDatos = false })
             }
         }
     }
