@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.apppruebasfisicas.R
 import com.example.apppruebasfisicas.entidades.PruebaFisicaObj
 
 @Composable
@@ -93,7 +95,7 @@ fun CuadroDialogo(texto: String, onDismiss: () -> Unit, onConfirm: () -> Unit) {
 }
 
 @Composable
-fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit){
+fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -132,24 +134,30 @@ fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit){
 }
 
 @Composable
-fun IconoVolver(navigateToBack: () -> Unit){
+fun IconoVolver(navigateToBack: () -> Unit) {
     Icon(
         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
         contentDescription = "Volver",
-        modifier = Modifier.padding(10.dp)
+        modifier = Modifier
+            .padding(10.dp)
             .size(30.dp)
             .clickable { navigateToBack() }
     )
 }
 
 @Composable
-fun ElementoPrueba(pruebaFisica: PruebaFisicaObj, onItemSelected: (PruebaFisicaObj) -> Unit, onUrlClick: () -> Unit){
+fun ElementoPrueba(
+    pruebaFisica: PruebaFisicaObj,
+    onItemSelected: (PruebaFisicaObj) -> Unit,
+    onUrlClick: () -> Unit
+) {
     Card(
         border = BorderStroke(2.dp, Color.Cyan),
-        modifier = Modifier.width(200.dp)
+        modifier = Modifier
+            .width(200.dp)
             .clickable { onItemSelected(pruebaFisica) }
     ) {
-        Column{
+        Column {
             Image(
                 painter = painterResource(id = pruebaFisica.imagen),
                 contentDescription = "Imagen Prueba",
@@ -164,7 +172,8 @@ fun ElementoPrueba(pruebaFisica: PruebaFisicaObj, onItemSelected: (PruebaFisicaO
             )
             Text(
                 text = pruebaFisica.url,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
                     .clickable { onUrlClick() },
                 fontSize = 15.sp,
                 color = Color.Blue
@@ -174,24 +183,94 @@ fun ElementoPrueba(pruebaFisica: PruebaFisicaObj, onItemSelected: (PruebaFisicaO
 }
 
 @Composable
-fun ListaDePruebas(){
-
+fun ListaDePruebas(edad: Int, onItemSelected: (PruebaFisicaObj) -> Unit, onUrlClick: () -> Unit) {
+    val listaPruebas = getPruebasFisicas(edad)
     LazyColumn(
-
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-
+        items(listaPruebas) { itemPrueba ->
+            ElementoPrueba(pruebaFisica = itemPrueba, onItemSelected = { onItemSelected(itemPrueba) }, onUrlClick = { onUrlClick() })
+        }
     }
 }
 
-fun getPruebasFisicas(): List<PruebaFisicaObj> {
-    return listOf(
+fun getPruebasFisicas(edad: Int): List<PruebaFisicaObj> {
 
-    )
+    if (edad <= 13) {
+        return listOf(
+            PruebaFisicaObj(
+                "Abdominales",
+                "https://www.foodspring.es/magazine/ejercicio-de-abdominales#:~:text=Los%20abdominales%20son%20uno%20de,gracias%20al%20m%C3%BAsculo%20recto%20abdominal",
+                R.drawable.abdominales
+            ),
+            PruebaFisicaObj(
+                "Flexibilidad",
+                "https://www.salud.mapfre.es/cuerpo-y-mente/deporte-y-salud/beneficios-flexibilidad/",
+                R.drawable.flexibilidad
+            ),
+            PruebaFisicaObj(
+                "Test de Cooper",
+                "https://universidadeuropea.com/blog/test-cooper/#:~:text=El%20test%20de%20Cooper%20es,para%20planificar%20rutinas%20de%20entrenamiento.",
+                R.drawable.test_cooper
+            )
+        )
+    } else if (edad == 14) {
+        return listOf(
+            PruebaFisicaObj(
+                "Abdominales",
+                "https://www.foodspring.es/magazine/ejercicio-de-abdominales#:~:text=Los%20abdominales%20son%20uno%20de,gracias%20al%20m%C3%BAsculo%20recto%20abdominal",
+                R.drawable.abdominales
+            ),
+            PruebaFisicaObj(
+                "Flexibilidad",
+                "https://www.salud.mapfre.es/cuerpo-y-mente/deporte-y-salud/beneficios-flexibilidad/",
+                R.drawable.flexibilidad
+            ),
+            PruebaFisicaObj(
+                "Test de Cooper",
+                "https://universidadeuropea.com/blog/test-cooper/#:~:text=El%20test%20de%20Cooper%20es,para%20planificar%20rutinas%20de%20entrenamiento.",
+                R.drawable.test_cooper
+            ),
+            PruebaFisicaObj(
+                "Velocidad 5x10",
+                "https://view.genially.com/66da06ae82e07261482d3374/presentation-prueba-de-velocidad-10x5pptx#:~:text=La%20prueba%20de%20velocidad%2010x5%20consiste%20en%20correr%2010%20veces,de%20descanso%20entre%20cada%20repetici%C3%B3n.&text=Los%20baremos%20de%20la%20prueba,el%20nivel%20de%20condici%C3%B3n%20f%C3%ADsica.",
+                R.drawable.velocidad
+            )
+        )
+    } else {
+        return listOf(
+            PruebaFisicaObj(
+                "Abdominales",
+                "https://www.foodspring.es/magazine/ejercicio-de-abdominales#:~:text=Los%20abdominales%20son%20uno%20de,gracias%20al%20m%C3%BAsculo%20recto%20abdominal",
+                R.drawable.abdominales
+            ),
+            PruebaFisicaObj(
+                "Flexibilidad",
+                "https://www.salud.mapfre.es/cuerpo-y-mente/deporte-y-salud/beneficios-flexibilidad/",
+                R.drawable.flexibilidad
+            ),
+            PruebaFisicaObj(
+                "Test de Cooper",
+                "https://universidadeuropea.com/blog/test-cooper/#:~:text=El%20test%20de%20Cooper%20es,para%20planificar%20rutinas%20de%20entrenamiento.",
+                R.drawable.test_cooper
+            ),
+            PruebaFisicaObj(
+                "Velocidad 5x10",
+                "https://view.genially.com/66da06ae82e07261482d3374/presentation-prueba-de-velocidad-10x5pptx#:~:text=La%20prueba%20de%20velocidad%2010x5%20consiste%20en%20correr%2010%20veces,de%20descanso%20entre%20cada%20repetici%C3%B3n.&text=Los%20baremos%20de%20la%20prueba,el%20nivel%20de%20condici%C3%B3n%20f%C3%ADsica.",
+                R.drawable.velocidad
+            ),
+            PruebaFisicaObj(
+                "Lanzar Balon 2KG",
+                "https://rusterfitness.com/blog/lanzamiento-balon-medicinal-hazlo-correcto/#:~:text=El%20lanzamiento%20de%20bal%C3%B3n%20medicinal%20es%20un%20ejercicio%20funcional%20que,los%20brazos%20y%20las%20piernas.",
+                R.drawable.balon_medicinal
+            )
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewComponents(){
+fun PreviewComponents() {
 //    Titulo("Pagina de Login")
 //    CuadroDialogo("Mensaje de confirmacion", {}, {})
 }

@@ -10,9 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.apppruebasfisicas.componentes.IconoVolver
+import com.example.apppruebasfisicas.componentes.ListaDePruebas
 
 @Composable
-fun PruebasFisicas(navigateToBack: () -> Unit){
+fun PruebasFisicas(edad: Int, navigateToBack: () -> Unit){
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -29,10 +30,6 @@ fun PruebasFisicas(navigateToBack: () -> Unit){
             //AQUI EL SWITCH
             Spacer(modifier = Modifier.weight(1f))
         }
-        LazyColumn (
-
-        ){
-
-        }
+        ListaDePruebas()
     }
 }
