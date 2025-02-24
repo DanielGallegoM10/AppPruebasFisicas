@@ -1,5 +1,7 @@
 package com.example.apppruebasfisicas.componentes
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -7,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -32,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -149,8 +153,9 @@ fun IconoVolver(navigateToBack: () -> Unit) {
 fun ElementoPrueba(
     pruebaFisica: PruebaFisicaObj,
     onItemSelected: (PruebaFisicaObj) -> Unit,
-    onUrlClick: () -> Unit
 ) {
+    val context = LocalContext.current
+
     Card(
         border = BorderStroke(2.dp, Color.Cyan),
         modifier = Modifier
@@ -161,7 +166,7 @@ fun ElementoPrueba(
             Image(
                 painter = painterResource(id = pruebaFisica.imagen),
                 contentDescription = "Imagen Prueba",
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.width(200.dp).height(150.dp),
                 contentScale = ContentScale.Crop
             )
             Text(
@@ -171,10 +176,13 @@ fun ElementoPrueba(
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = pruebaFisica.url,
+                text = "Abrir enlace de la Prueba",
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .clickable { onUrlClick() },
+                    .clickable {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(pruebaFisica.url))
+                        context.startActivity(intent)
+                    },
                 fontSize = 15.sp,
                 color = Color.Blue
             )
@@ -183,13 +191,13 @@ fun ElementoPrueba(
 }
 
 @Composable
-fun ListaDePruebas(edad: Int, onItemSelected: (PruebaFisicaObj) -> Unit, onUrlClick: () -> Unit) {
+fun ListaDePruebas(edad: Int, onItemSelected: (PruebaFisicaObj) -> Unit) {
     val listaPruebas = getPruebasFisicas(edad)
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(listaPruebas) { itemPrueba ->
-            ElementoPrueba(pruebaFisica = itemPrueba, onItemSelected = { onItemSelected(itemPrueba) }, onUrlClick = { onUrlClick() })
+            ElementoPrueba(pruebaFisica = itemPrueba, onItemSelected = { onItemSelected(itemPrueba) })
         }
     }
 }

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 object Login
 
 @Serializable
-object Principal
+data class Principal(val idUsuario: Int)
 
 @Serializable
-object PruebasFisicas
+data class PruebasFisicas(val edad: Int)

@@ -19,7 +19,7 @@ open class BDDPruebasFisicas(context: Context) :
                 " ('DiegoB33', 'diego123')," +
                 " ('LucasBM44', 'lucas789')"
 
-    private val crearTablaDatos = "CREATE TABLE datos (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER, fecha TEXT, peso INTEGER, altura INTEGER, sexo TEXT)"
+    private val crearTablaDatos = "CREATE TABLE datos (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER, edad INTEGER, peso INTEGER, altura INTEGER, sexo TEXT)"
 
     private val borrarTablaDatos = "DROP TABLE IF EXISTS datos"
 

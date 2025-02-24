@@ -1,5 +1,6 @@
 package com.example.apppruebasfisicas.login
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,11 +23,10 @@ import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.LoginObj
 
 @Composable
-fun PantallaLogin(navigateToPrincipal: () -> Unit){
+fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
     Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         var textoUsuario by rememberSaveable { mutableStateOf("") }
         var textoPass by rememberSaveable { mutableStateOf("") }
-        var correctoDatos by rememberSaveable { mutableStateOf(false) }
         var incorrectoDatos by rememberSaveable { mutableStateOf(false) }
 
         val context = LocalContext.current
@@ -34,6 +34,8 @@ fun PantallaLogin(navigateToPrincipal: () -> Unit){
         val loginHelper = LoginHelper(context)
 
         var usuarioEncontrado: LoginObj? = null
+
+        var idUsuario: Int
 
         Spacer(modifier = Modifier.weight(1f))
         Titulo("Página de Login")
@@ -50,10 +52,11 @@ fun PantallaLogin(navigateToPrincipal: () -> Unit){
                 incorrectoDatos = true
             }else{
                 usuarioEncontrado = loginHelper.getUsuario(textoUsuario, textoPass)
+                idUsuario = usuarioEncontrado!!.id
                 if (usuarioEncontrado == null) {
                     incorrectoDatos = true
                 }else{
-                    correctoDatos = true
+                    navigateToPrincipal(idUsuario)
                 }
             }
         }
@@ -62,10 +65,5 @@ fun PantallaLogin(navigateToPrincipal: () -> Unit){
         if(incorrectoDatos){
             CuadroDialogo("Fallo en el inicio de sesion, los datos son incorrectos", { incorrectoDatos = false }, { incorrectoDatos = false })
         }
-
-        if (correctoDatos){
-            CuadroDialogo("Datos correctos", { correctoDatos = false }, { navigateToPrincipal() })
-        }
-
     }
 }

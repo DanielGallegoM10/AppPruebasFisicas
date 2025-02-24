@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,7 +33,7 @@ import com.example.apppruebasfisicas.entidades.DatosObj
 
 //@Preview(showBackground = true)
 @Composable
-fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit) {
+fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int) -> Unit) {
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -77,6 +78,8 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit) {
                 Spacer(modifier = Modifier.weight(1f))
             }
             Spacer(modifier = Modifier.weight(1f))
+            Text("$idUsuario")
+            Spacer(modifier = Modifier.weight(1f))
             CuadroTexto(edad, "Introduzca su edad") { edad = it }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -88,7 +91,6 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit) {
             Spacer(modifier = Modifier.weight(1f))
             RadioButtomSexo(textoSexo) { textoSexo = it }
 
-
             Spacer(modifier = Modifier.weight(1f))
             Boton("Continuar") {
                 if (edad.isEmpty() || peso.isEmpty() || altura.isEmpty() || textoSexo.isEmpty()) {
@@ -96,7 +98,6 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit) {
                 } else {
                     val datosObj = DatosObj(idUsuario, edad.toInt(), peso.toInt(), altura.toInt(), textoSexo)
 
-                    // Verificar si el usuario ya tiene datos guardados
                     val datosExistentes = datosHelper.obtenerDatosPorUsuario(idUsuario)
 
                     if (datosExistentes != null) {
@@ -105,6 +106,7 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit) {
                     } else {
                         datosHelper.guardarDatos(datosObj)
                     }
+                    navigateToPruebasFisicas(edad.toInt())
                 }
             }
             Spacer(modifier = Modifier.weight(1f))

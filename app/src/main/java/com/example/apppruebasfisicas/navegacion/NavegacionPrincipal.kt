@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +12,7 @@ import com.example.apppruebasfisicas.navegacion.Login
 import com.example.apppruebasfisicas.navegacion.Principal
 import com.example.apppruebasfisicas.navegacion.PruebasFisicas
 import com.example.apppruebasfisicas.pantallaPrincipal.PantallaPrincipal
+import com.example.apppruebasfisicas.pruebasFisicasLista.PruebasFisicas
 
 @Composable
 fun NavegacionPrincipal() {
@@ -19,26 +21,30 @@ fun NavegacionPrincipal() {
     NavHost(navController = navController, startDestination = Login) {
         composable<Login> {
             PantallaLogin {
-                navController.navigate(Principal)
+                idUsuario -> navController.navigate(Principal(idUsuario = idUsuario))
             }
         }
         composable<Principal> { backStackEntry ->
-            val usuario: LoginObj = backStackEntry.toRoute()
+            val usuario: Principal = backStackEntry.toRoute()
+
             PantallaPrincipal(
-                idUsuario = usuario.id,
+                usuario.idUsuario,
                 navigateToBack = {
                     navController.navigate(Login) {
                         popUpTo(Login) {
                             inclusive = true
                         }
                     }
+                },
+                navigateToPruebasFisicas = { edad ->
+                    navController.navigate(PruebasFisicas(edad = edad))
                 }
             )
         }
         composable<PruebasFisicas> { backStackEntry ->
-            val datos: DatosObj = backStackEntry.toRoute()
+            val usuario: PruebasFisicas = backStackEntry.toRoute()
             PruebasFisicas(
-                datos.edad,
+                edad = usuario.edad,
                 navigateToBack = {
                     navController.navigate(Principal) {
                         popUpTo(Principal) {
@@ -50,3 +56,4 @@ fun NavegacionPrincipal() {
         }
     }
 }
+
