@@ -13,7 +13,6 @@ data class LoginObj(
     val pass: String
 )
 
-@Parcelize
 @Serializable
 data class DatosObj(
     var id : Int,
@@ -22,7 +21,7 @@ data class DatosObj(
     val peso : Int,
     val altura : Int,
     val sexo : String
-): Parcelable {
+) {
     constructor(
         idUsuario : Int,
         edad : Int,
@@ -32,10 +31,10 @@ data class DatosObj(
     ): this(0, idUsuario, edad, peso, altura, sexo)
 }
 
-@Parcelize
 @Serializable
 data class PruebaFisicaObj(
     val nombre : String,
     val url : String,
+    val categoria: String,
     @DrawableRes val imagen : Int
-): Parcelable
+)

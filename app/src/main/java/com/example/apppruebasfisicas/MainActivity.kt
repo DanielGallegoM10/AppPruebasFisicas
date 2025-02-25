@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
             AppPruebasFisicasTheme {
                 val bdd = BDDPruebasFisicas(this)
                 val db = bdd.writableDatabase
-//                bdd.onUpgrade(db, 0, 0)
+                bdd.onUpgrade(db, 0, 0)
                 NavegacionPrincipal()
             }
         }
