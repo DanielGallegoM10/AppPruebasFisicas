@@ -12,7 +12,7 @@ import com.example.apppruebasfisicas.navegacion.Login
 import com.example.apppruebasfisicas.navegacion.Principal
 import com.example.apppruebasfisicas.navegacion.PruebasFisicas
 import com.example.apppruebasfisicas.pantallaPrincipal.PantallaPrincipal
-import com.example.apppruebasfisicas.pruebasFisicasLista.PruebasFisicas
+import com.example.apppruebasfisicas.pruebasFisicasLista.PruebasFisicasLista
 
 @Composable
 fun NavegacionPrincipal() {
@@ -43,7 +43,7 @@ fun NavegacionPrincipal() {
         }
         composable<PruebasFisicas> { backStackEntry ->
             val usuario: PruebasFisicas = backStackEntry.toRoute()
-            PruebasFisicas(
+            PruebasFisicasLista(
                 edad = usuario.edad,
                 navigateToBack = {
                     navController.navigate(Principal) {

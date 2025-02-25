@@ -1,9 +1,11 @@
 package com.example.apppruebasfisicas.login
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -11,6 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
@@ -46,6 +49,8 @@ fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
 
         CuadroTextoPass(textoPass, "Introduzca su contraseña") { textoPass = it }
         Spacer(modifier = Modifier.weight(1f))
+
+        Text("¿Ha olvidado su contraseña", modifier = Modifier.clickable {  }, color = Color.Blue)
 
         Boton("Iniciar Sesion") {
             if (textoUsuario.isEmpty() || textoPass.isEmpty()) {

@@ -21,7 +21,7 @@ import com.example.apppruebasfisicas.componentes.ListaDePruebas
 import com.example.apppruebasfisicas.componentes.SearchView
 
 @Composable
-fun PruebasFisicas(edad: Int, navigateToBack: () -> Unit){
+fun PruebasFisicasLista(edad: Int, navigateToBack: () -> Unit){
     var busqueda by rememberSaveable { mutableStateOf("") }
     Column(
         modifier = Modifier.fillMaxSize(),

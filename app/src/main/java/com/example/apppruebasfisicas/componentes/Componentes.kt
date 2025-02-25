@@ -97,6 +97,20 @@ fun CuadroDialogo(texto: String, onDismiss: () -> Unit, onConfirm: () -> Unit) {
 }
 
 @Composable
+fun DialogoCambiaContrasena(nuevaContrasena: String, onDismiss: () -> Unit, onConfirm: () -> Unit, onValueChange: (String) -> Unit) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
+        confirmButton = {
+            TextButton(onClick = { onConfirm() }) {
+                Text("Aceptar")
+            }
+        },
+        title = { CuadroTextoPass(nuevaContrasena, "Introduzca su nueva contraseña", { onValueChange(it) }) },
+    )
+}
+
+@Composable
 fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -191,7 +205,7 @@ fun ElementoPrueba(
 @Composable
 fun ListaDePruebas(edad: Int, busqueda: String, onItemSelected: (PruebaFisicaObj) -> Unit) {
     val listaPruebas = getPruebasFisicas(edad).filter {
-        it.nombre.contains(busqueda, ignoreCase = true)
+        it.nombre.startsWith(busqueda, ignoreCase = true)
     }
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
