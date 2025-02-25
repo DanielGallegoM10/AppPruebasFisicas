@@ -97,7 +97,7 @@ fun CuadroDialogo(texto: String, onDismiss: () -> Unit, onConfirm: () -> Unit) {
 }
 
 @Composable
-fun DialogoCambiaContrasena(nuevaContrasena: String, onDismiss: () -> Unit, onConfirm: () -> Unit, onValueChange: (String) -> Unit) {
+fun DialogoCambiaContrasena(usuario: String, nuevaContrasena: String, onDismiss: () -> Unit, onConfirm: () -> Unit, onValueChange: (String) -> Unit) {
     AlertDialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
@@ -106,7 +106,7 @@ fun DialogoCambiaContrasena(nuevaContrasena: String, onDismiss: () -> Unit, onCo
                 Text("Aceptar")
             }
         },
-        title = { CuadroTextoPass(nuevaContrasena, "Introduzca su nueva contraseña", { onValueChange(it) }) },
+        title = { CuadroTextoPass(nuevaContrasena, "Introduzca su nueva contraseña") { onValueChange(it) } },
     )
 }
 

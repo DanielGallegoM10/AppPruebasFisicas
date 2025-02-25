@@ -22,6 +22,7 @@ import com.example.apppruebasfisicas.componentes.Boton
 import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.CuadroTextoPass
+import com.example.apppruebasfisicas.componentes.DialogoCambiaContrasena
 import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.LoginObj
 
@@ -31,6 +32,10 @@ fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
         var textoUsuario by rememberSaveable { mutableStateOf("") }
         var textoPass by rememberSaveable { mutableStateOf("") }
         var incorrectoDatos by rememberSaveable { mutableStateOf(false) }
+        var cambiaContrasena by rememberSaveable { mutableStateOf(false) }
+        var nuevaContraseña by rememberSaveable { mutableStateOf("") }
+
+        var nombreUsuarioEncontrado by rememberSaveable { mutableStateOf("") }
 
         val context = LocalContext.current
 
@@ -50,7 +55,8 @@ fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
         CuadroTextoPass(textoPass, "Introduzca su contraseña") { textoPass = it }
         Spacer(modifier = Modifier.weight(1f))
 
-        Text("¿Ha olvidado su contraseña", modifier = Modifier.clickable {  }, color = Color.Blue)
+        Text("¿Ha olvidado su contraseña", modifier = Modifier.clickable { cambiaContrasena = true }, color = Color.Blue)
+        Spacer(modifier = Modifier.weight(1f))
 
         Boton("Iniciar Sesion") {
             if (textoUsuario.isEmpty() || textoPass.isEmpty()) {
@@ -61,6 +67,8 @@ fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
                 if (usuarioEncontrado == null) {
                     incorrectoDatos = true
                 }else{
+                    nombreUsuarioEncontrado = usuarioEncontrado!!.usuario
+
                     navigateToPrincipal(idUsuario)
                 }
             }
@@ -69,6 +77,10 @@ fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
 
         if(incorrectoDatos){
             CuadroDialogo("Fallo en el inicio de sesion, los datos son incorrectos", { incorrectoDatos = false }, { incorrectoDatos = false })
+        }
+
+        if (cambiaContrasena){
+            DialogoCambiaContrasena(nombreUsuarioEncontrado, nuevaContraseña, {cambiaContrasena = false}, { loginHelper.cambiarContrasena(textoUsuario, nuevaContraseña); cambiaContrasena = false }, { nuevaContraseña = it })
         }
     }
 }

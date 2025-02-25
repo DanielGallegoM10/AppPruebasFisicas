@@ -23,4 +23,10 @@ class LoginHelper(context: Context) : BDDPruebasFisicas(context) {
         }
         return usuario
     }
+
+    fun cambiarContrasena(nombre: String, pass: String){
+        val db : SQLiteDatabase = writableDatabase
+        db.execSQL("UPDATE login SET pass = '$pass' WHERE usuario = '$nombre'")
+    }
+
 }
