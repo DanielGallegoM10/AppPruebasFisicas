@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHost
@@ -14,6 +15,7 @@ import com.example.apppruebasfisicas.navegacion.PruebasFisicas
 import com.example.apppruebasfisicas.pantallaPrincipal.PantallaPrincipal
 import com.example.apppruebasfisicas.pruebasFisicasLista.PruebasFisicasLista
 
+@SuppressLint("RestrictedApi")
 @Composable
 fun NavegacionPrincipal() {
     val navController = rememberNavController()
@@ -46,8 +48,10 @@ fun NavegacionPrincipal() {
             PruebasFisicasLista(
                 edad = usuario.edad,
                 navigateToBack = {
-                    navController.navigate(Principal) {
-                        popUpTo(Principal) {
+                    val previousEntry = navController.previousBackStackEntry
+                    val idUsuario = previousEntry?.arguments?.getInt("idUsuario") ?: 0
+                    navController.navigate(Principal(idUsuario = idUsuario)) {
+                        popUpTo(Principal::class) {
                             inclusive = true
                         }
                     }

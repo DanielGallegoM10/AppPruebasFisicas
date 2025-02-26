@@ -55,7 +55,7 @@ fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
         CuadroTextoPass(textoPass, "Introduzca su contraseña") { textoPass = it }
         Spacer(modifier = Modifier.weight(1f))
 
-        Text("¿Ha olvidado su contraseña", modifier = Modifier.clickable { cambiaContrasena = true }, color = Color.Blue)
+        Text("¿Ha olvidado su contraseña?", modifier = Modifier.clickable { cambiaContrasena = true }, color = Color.Blue)
         Spacer(modifier = Modifier.weight(1f))
 
         Boton("Iniciar Sesion") {
@@ -80,7 +80,7 @@ fun PantallaLogin(navigateToPrincipal: (Int) -> Unit){
         }
 
         if (cambiaContrasena){
-            DialogoCambiaContrasena(nombreUsuarioEncontrado, nuevaContraseña, {cambiaContrasena = false}, { loginHelper.cambiarContrasena(textoUsuario, nuevaContraseña); cambiaContrasena = false }, { nuevaContraseña = it })
+            DialogoCambiaContrasena(textoUsuario, nuevaContraseña, {cambiaContrasena = false}, { loginHelper.cambiarContrasena(textoUsuario, nuevaContraseña); cambiaContrasena = false }, { nuevaContraseña = it })
         }
     }
 }
