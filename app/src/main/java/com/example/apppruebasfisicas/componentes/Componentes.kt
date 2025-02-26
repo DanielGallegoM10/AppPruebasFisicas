@@ -332,7 +332,7 @@ fun getPruebasFisicas(edad: Int): List<PruebaFisicaObj> {
                 R.drawable.velocidad
             ),
             PruebaFisicaObj(
-                "Lanzar Balon 2KG",
+                "Lanzamiento de Balon",
                 "https://rusterfitness.com/blog/lanzamiento-balon-medicinal-hazlo-correcto/#:~:text=El%20lanzamiento%20de%20bal%C3%B3n%20medicinal%20es%20un%20ejercicio%20funcional%20que,los%20brazos%20y%20las%20piernas.",
                 "Fuerza Muscular",
                 R.drawable.balon_medicinal
