@@ -51,7 +51,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
+import com.example.apppruebasfisicas.BDD.NotasHelper
 import com.example.apppruebasfisicas.R
+import com.example.apppruebasfisicas.entidades.NotaObj
 import com.example.apppruebasfisicas.entidades.PruebaFisicaObj
 
 @Composable
@@ -337,6 +339,28 @@ fun getPruebasFisicas(edad: Int): List<PruebaFisicaObj> {
             )
         )
     }
+}
+
+@Composable
+fun ListaNotasObtenidas(idUsuario: Int){
+    val listaNotas = getNotasObtenidas(idUsuario)
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(listaNotas) { nota ->
+            Text(nota.nombrePrueba + ": sexo: " + nota.sexo + " edad: " + nota.edad + " marca registrada: " + nota.marca + " nota: " + nota.nota, modifier = Modifier.padding(8.dp))
+        }
+    }
+}
+
+@Composable
+fun getNotasObtenidas(idUsuario: Int): List<NotaObj>{
+    val context = LocalContext.current
+    val notasHelper = NotasHelper(context)
+
+    val notas = notasHelper.obtenerNotaPorUsuario(idUsuario)
+
+    return notas
 }
 
 @Composable

@@ -11,9 +11,11 @@ import com.example.apppruebasfisicas.entidades.LoginObj
 import com.example.apppruebasfisicas.login.PantallaLogin
 import com.example.apppruebasfisicas.navegacion.DetallePrueba
 import com.example.apppruebasfisicas.navegacion.Login
+import com.example.apppruebasfisicas.navegacion.MuestraNotas
 import com.example.apppruebasfisicas.navegacion.Principal
 import com.example.apppruebasfisicas.navegacion.PruebasFisicas
 import com.example.apppruebasfisicas.pantallaDetallePrueba.PantallaDetallePrueba
+import com.example.apppruebasfisicas.pantallaMuestraNotas.PantallaMuestraNotas
 import com.example.apppruebasfisicas.pantallaPrincipal.PantallaPrincipal
 import com.example.apppruebasfisicas.pruebasFisicasLista.PruebasFisicasLista
 
@@ -40,8 +42,11 @@ fun NavegacionPrincipal() {
                         }
                     }
                 },
-                navigateToPruebasFisicas = { edad ->
-                    navController.navigate(PruebasFisicas(edad = edad, idUsuario = usuario.idUsuario))
+                navigateToPruebasFisicas = { edad, sexo ->
+                    navController.navigate(PruebasFisicas(edad = edad, sexo = sexo, idUsuario = usuario.idUsuario))
+                },
+                navigateToMuestraNotas = { idUsuario ->
+                    navController.navigate(MuestraNotas(idUsuario = idUsuario))
                 }
             )
         }
@@ -57,7 +62,7 @@ fun NavegacionPrincipal() {
                     }
                 },
                 onItemSelected = { nombrePrueba ->
-                    navController.navigate(DetallePrueba(nombrePrueba = nombrePrueba, edad = usuario.edad, idUsuario = usuario.idUsuario))
+                    navController.navigate(DetallePrueba(nombrePrueba = nombrePrueba, sexo = usuario.sexo, edad = usuario.edad, idUsuario = usuario.idUsuario))
                 }
             )
         }
@@ -67,11 +72,22 @@ fun NavegacionPrincipal() {
                 nombrePrueba = detallePrueba.nombrePrueba,
                 idUsuario = detallePrueba.idUsuario,
                 edad = detallePrueba.edad,
+                sexo = detallePrueba.sexo,
+
             ) {
                 val previousEntry = navController.previousBackStackEntry
                 val edad = previousEntry?.arguments?.getInt("edad") ?: 0
-                navController.navigate(PruebasFisicas(edad = edad, idUsuario = detallePrueba.idUsuario))
+                navController.navigate(PruebasFisicas(edad = edad, sexo = detallePrueba.sexo, idUsuario = detallePrueba.idUsuario))
             }
+        }
+        composable<MuestraNotas> { backStackEntry ->
+            val muestraNotas: MuestraNotas = backStackEntry.toRoute()
+            PantallaMuestraNotas(
+                idUsuario = muestraNotas.idUsuario,
+                navigateToBack = {
+                    navController.navigate(Principal(idUsuario = muestraNotas.idUsuario))
+                }
+            )
         }
     }
 }

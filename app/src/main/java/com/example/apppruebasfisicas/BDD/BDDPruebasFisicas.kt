@@ -23,7 +23,7 @@ open class BDDPruebasFisicas(context: Context) :
 
     private val borrarTablaDatos = "DROP TABLE IF EXISTS datos"
 
-    private val crearTablaNotas = "CREATE TABLE notas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER, nombrePrueba TEXT, edad INTEGER, marca TEXT, nota TEXT)"
+    private val crearTablaNotas = "CREATE TABLE notas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER, nombrePrueba TEXT, sexo TEXT, edad INTEGER, marca TEXT, nota TEXT)"
 
     private val borrarTablaNotas = "DROP TABLE IF EXISTS notas"
 

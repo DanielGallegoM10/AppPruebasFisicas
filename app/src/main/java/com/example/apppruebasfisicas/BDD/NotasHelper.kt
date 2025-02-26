@@ -18,11 +18,12 @@ class NotasHelper(context: Context) : BDDPruebasFisicas(context) {
         try {
             val values: ContentValues = ContentValues()
 
-            if (nota.id > 0){
+            if (nota.id > 0) {
                 values.put("id", nota.id)
             }
             values.put("idUsuario", nota.idUsuario)
             values.put("nombrePrueba", nota.nombrePrueba)
+            values.put("sexo", nota.sexo)
             values.put("edad", nota.edad)
             values.put("marca", nota.marca)
             values.put("nota", nota.nota)
@@ -31,9 +32,9 @@ class NotasHelper(context: Context) : BDDPruebasFisicas(context) {
 
             db.setTransactionSuccessful()
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             println(e.message)
-        }finally {
+        } finally {
             db.endTransaction()
         }
         return notaID
@@ -54,8 +55,9 @@ class NotasHelper(context: Context) : BDDPruebasFisicas(context) {
             val values = ContentValues().apply {
                 put("idUsuario", nota.idUsuario)
                 put("nombrePrueba", nota.nombrePrueba)
+                put("sexo", nota.sexo)
                 put("marca", nota.marca)
-                put("nota", nota.edad)
+                put("edad", nota.edad)
                 put("nota", nota.nota)
             }
 
@@ -74,21 +76,26 @@ class NotasHelper(context: Context) : BDDPruebasFisicas(context) {
         return notaID
     }
 
-    fun obtenerNotaPorUsuario(idUsuario: Int): NotaObj? {
+    fun obtenerNotaPorUsuario(idUsuario: Int): List<NotaObj> {
         val db: SQLiteDatabase = readableDatabase
-        var notas: NotaObj? = null
+        var notas = mutableListOf<NotaObj>()
 
-        val cursor = db.rawQuery("SELECT * FROM notas WHERE idUsuario = ?", arrayOf(idUsuario.toString()))
+        val cursor =
+            db.rawQuery("SELECT * FROM notas WHERE idUsuario = ?", arrayOf(idUsuario.toString()))
 
         if (cursor.moveToFirst()) {
-            notas = NotaObj(
-                cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                cursor.getInt(cursor.getColumnIndexOrThrow("idUsuario")),
-                cursor.getString(cursor.getColumnIndexOrThrow("nombrePrueba")),
-                cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
-                cursor.getString(cursor.getColumnIndexOrThrow("marca")),
-                cursor.getString(cursor.getColumnIndexOrThrow("nota"))
-            )
+            do {
+                val nota = NotaObj(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("idUsuario")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("nombrePrueba")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("sexo")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("marca")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("nota"))
+                )
+                notas.add(nota)
+            }while (cursor.moveToNext())
         }
         cursor.close()
         return notas

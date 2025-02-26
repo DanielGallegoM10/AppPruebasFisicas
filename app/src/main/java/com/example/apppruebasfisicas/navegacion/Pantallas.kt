@@ -9,7 +9,10 @@ object Login
 data class Principal(val idUsuario: Int)
 
 @Serializable
-data class PruebasFisicas(val edad: Int, val idUsuario: Int)
+data class PruebasFisicas(val edad: Int, val sexo: String, val idUsuario: Int)
 
 @Serializable
-data class DetallePrueba(val nombrePrueba: String, val edad: Int, val idUsuario: Int)
+data class DetallePrueba(val nombrePrueba: String, val sexo: String, val edad: Int, val idUsuario: Int)
+
+@Serializable
+data class MuestraNotas(val idUsuario: Int)

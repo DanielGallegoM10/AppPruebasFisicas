@@ -29,14 +29,13 @@ import com.example.apppruebasfisicas.componentes.IconoVolver
 import com.example.apppruebasfisicas.entidades.NotaObj
 
 @Composable
-fun PantallaDetallePrueba(nombrePrueba: String, edad: Int, idUsuario: Int, navigateToBack: () -> Unit) {
+fun PantallaDetallePrueba(nombrePrueba: String, edad: Int, sexo: String, idUsuario: Int, navigateToBack: () -> Unit) {
     var textoMarca by rememberSaveable { mutableStateOf("") }
 
     val datosHelper = DatosHelper(LocalContext.current)
 
     var notaCalculada by rememberSaveable { mutableStateOf("") }
 
-    var sexo by rememberSaveable { mutableStateOf("Chico") }
 
     val notaHelper = NotasHelper(LocalContext.current)
 
@@ -45,10 +44,6 @@ fun PantallaDetallePrueba(nombrePrueba: String, edad: Int, idUsuario: Int, navig
     var dialogoIncorrecto by rememberSaveable { mutableStateOf(false) }
     var dialogoCorrecto by rememberSaveable { mutableStateOf(false) }
 
-    val usuarioEncontrado = datosHelper.obtenerDatosPorUsuario(idUsuario)
-    if (usuarioEncontrado != null) {
-        sexo = usuarioEncontrado.sexo
-    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -97,7 +92,7 @@ fun PantallaDetallePrueba(nombrePrueba: String, edad: Int, idUsuario: Int, navig
                 "La nota obtenida es: $notaCalculada",
                 { dialogoCorrecto = false },
                 {
-                    notaObtenida = NotaObj(idUsuario, nombrePrueba, edad, textoMarca, notaCalculada)
+                    notaObtenida = NotaObj(idUsuario, nombrePrueba, sexo, edad, textoMarca, notaCalculada)
                     notaHelper.guardarNota(notaObtenida)
                     dialogoCorrecto = false })
         }

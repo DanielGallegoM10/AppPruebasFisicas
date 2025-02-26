@@ -44,6 +44,7 @@ data class NotaObj(
     val id : Int,
     val idUsuario : Int,
     val nombrePrueba : String,
+    val sexo : String,
     val edad: Int,
     val marca : String,
     val nota : String
@@ -51,8 +52,9 @@ data class NotaObj(
     constructor(
         idUsuario : Int,
         nombrePrueba : String,
+        sexo : String,
         edad: Int,
         marca : String,
         nota : String
-    ): this(0, idUsuario, nombrePrueba, edad, marca, nota)
+    ): this(0, idUsuario, nombrePrueba, sexo, edad, marca, nota)
 }

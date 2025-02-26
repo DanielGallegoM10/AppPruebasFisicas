@@ -36,11 +36,10 @@ import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.IconoVolver
 import com.example.apppruebasfisicas.componentes.RadioButtomSexo
 import com.example.apppruebasfisicas.entidades.DatosObj
-import kotlin.math.log
 
 //@Preview(showBackground = true)
 @Composable
-fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int) -> Unit) {
+fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int, String) -> Unit, navigateToMuestraNotas: (Int) -> Unit) {
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -68,7 +67,9 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPrue
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.weight(1f))
-                Boton("Ver Notas") { }
+                Boton("Ver Notas") {
+                    navigateToMuestraNotas(idUsuario)
+                }
                 Spacer(modifier = Modifier.weight(1f))
                 Boton("Calcular IMC") {
                     val pesoValor = peso.toFloatOrNull()
@@ -111,18 +112,9 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPrue
                     dialogoErrorDatos = true
                 } else {
                     val datosObj = DatosObj(idUsuario, edad.toInt(), peso.toInt(), altura.toInt(), textoSexo)
-
-//                    val datosExistentes = datosHelper.obtenerDatosPorUsuario(idUsuario)
-
-//                    if (datosExistentes != null) {
-//                        datosObj.id = datosExistentes.id
-//                        datosHelper.actualizarDatos(datosObj)
-//                    } else {
-//                    datosHelper.guardarDatos(datosObj)
-//                    }
                     datosHelper.guardarDatos(datosObj)
 
-                    navigateToPruebasFisicas(edad.toInt())
+                    navigateToPruebasFisicas(edad.toInt(), textoSexo)
                 }
             }
             Spacer(modifier = Modifier.weight(1f))
