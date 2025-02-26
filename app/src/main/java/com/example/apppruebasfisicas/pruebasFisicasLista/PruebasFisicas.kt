@@ -43,7 +43,7 @@ fun PruebasFisicasLista(edad: Int, navigateToBack: () -> Unit){
         }
         DropMenuCategorias(edad) { categoriaSeleccionada = it }
         ListaDePruebas(edad, busqueda, categoriaSeleccionada, onItemSelected = {
-            //Esto me llevara a la pantalla del deta
+            //Esto me llevara a la pantalla del detalle
         })
     }
 }
