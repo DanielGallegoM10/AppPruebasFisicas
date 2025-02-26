@@ -1,18 +1,19 @@
 package com.example.apppruebasfisicas.navegacion
 
+import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 import kotlinx.serialization.Serializable
 
 @Serializable
 object Login
 
 @Serializable
-data class Principal(val idUsuario: Int)
+data class Principal(val themeMode: ThemeMode, val idUsuario: Int)
 
 @Serializable
-data class PruebasFisicas(val edad: Int, val sexo: String, val idUsuario: Int)
+data class PruebasFisicas(val themeMode: ThemeMode, val edad: Int, val sexo: String, val idUsuario: Int)
 
 @Serializable
-data class DetallePrueba(val nombrePrueba: String, val sexo: String, val edad: Int, val idUsuario: Int)
+data class DetallePrueba(val themeMode: ThemeMode, val nombrePrueba: String, val sexo: String, val edad: Int, val idUsuario: Int)
 
 @Serializable
-data class MuestraNotas(val idUsuario: Int)
+data class MuestraNotas(val themeMode: ThemeMode, val idUsuario: Int)

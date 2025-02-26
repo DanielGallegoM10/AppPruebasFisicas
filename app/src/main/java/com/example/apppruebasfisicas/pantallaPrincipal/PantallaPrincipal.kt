@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,23 +31,32 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.apppruebasfisicas.BDD.DatosHelper
 import com.example.apppruebasfisicas.BDD.LoginHelper
+import com.example.apppruebasfisicas.ThemeSwitcher
 import com.example.apppruebasfisicas.componentes.Boton
 import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.IconoVolver
 import com.example.apppruebasfisicas.componentes.RadioButtomSexo
 import com.example.apppruebasfisicas.entidades.DatosObj
+import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
 //@Preview(showBackground = true)
 @Composable
-fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int, String) -> Unit, navigateToMuestraNotas: (Int) -> Unit) {
+fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int, String) -> Unit, navigateToMuestraNotas: (Int) -> Unit) {
+    val context = LocalContext.current
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(20.dp))
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             IconoVolver { navigateToBack() }
+            Spacer(modifier = Modifier.weight(1f))
+            ThemeSwitcher(themeMode) {
+                    newMode ->
+                onThemeChange(newMode)
+                ThemePreferences.saveTheme(context, newMode)
+            }
         }
         Column(
             Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
@@ -90,9 +100,9 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPrue
             val loginHelper = LoginHelper(context = LocalContext.current)
             val usuarioEncontrado = loginHelper.getUsuarioPorID(idUsuario)
             if (usuarioEncontrado != null) {
-                Text("Bienvenido " + usuarioEncontrado.usuario + "!", fontSize = 30.sp, fontFamily = FontFamily.Cursive, fontWeight = FontWeight.Bold)
+                Text("Bienvenido " + usuarioEncontrado.usuario + "!", fontSize = 30.sp, fontFamily = FontFamily.Cursive, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
             }else{
-                Text("Error al cargar el usuario")
+                Text("Error al cargar el usuario", color = MaterialTheme.colorScheme.onBackground)
             }
             Spacer(modifier = Modifier.weight(1f))
             CuadroTexto(edad, "Introduzca su edad") { edad = it }

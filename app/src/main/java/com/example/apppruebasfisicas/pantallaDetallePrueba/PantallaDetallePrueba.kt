@@ -22,15 +22,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.apppruebasfisicas.BDD.DatosHelper
 import com.example.apppruebasfisicas.BDD.NotasHelper
+import com.example.apppruebasfisicas.ThemeSwitcher
 import com.example.apppruebasfisicas.componentes.Boton
 import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.IconoVolver
 import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.NotaObj
+import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
 @Composable
-fun PantallaDetallePrueba(nombrePrueba: String, edad: Int, sexo: String, idUsuario: Int, navigateToBack: () -> Unit) {
+fun PantallaDetallePrueba(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, nombrePrueba: String, edad: Int, sexo: String, idUsuario: Int, navigateToBack: () -> Unit) {
     var textoMarca by rememberSaveable { mutableStateOf("") }
 
     val datosHelper = DatosHelper(LocalContext.current)
@@ -45,14 +47,21 @@ fun PantallaDetallePrueba(nombrePrueba: String, edad: Int, sexo: String, idUsuar
     var dialogoIncorrecto by rememberSaveable { mutableStateOf(false) }
     var dialogoCorrecto by rememberSaveable { mutableStateOf(false) }
 
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(20.dp))
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             IconoVolver { navigateToBack() }
+            Spacer(modifier = Modifier.weight(1f))
+            ThemeSwitcher(themeMode) {
+                    newMode ->
+                onThemeChange(newMode)
+                ThemePreferences.saveTheme(context, newMode)
+            }
         }
         Spacer(modifier = Modifier.weight(1f))
         Titulo("Prueba de: $nombrePrueba")

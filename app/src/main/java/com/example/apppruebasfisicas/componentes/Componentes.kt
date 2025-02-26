@@ -19,6 +19,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Brightness2
+import androidx.compose.material.icons.rounded.Brightness5
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -29,6 +31,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -56,6 +59,7 @@ import com.example.apppruebasfisicas.BDD.NotasHelper
 import com.example.apppruebasfisicas.R
 import com.example.apppruebasfisicas.entidades.NotaObj
 import com.example.apppruebasfisicas.entidades.PruebaFisicaObj
+import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
 @Composable
 fun CuadroTexto(texto: String, labelName: String, onValueChange: (String) -> Unit) {
@@ -90,6 +94,7 @@ fun Titulo(texto: String) {
         textAlign = TextAlign.Center,
         fontFamily = FontFamily.Cursive,
         fontWeight = FontWeight.Bold,
+        color = MaterialTheme.colorScheme.onBackground
     )
 }
 
@@ -100,7 +105,7 @@ fun CuadroDialogo(texto: String, onDismiss: () -> Unit, onConfirm: () -> Unit) {
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
         confirmButton = {
             TextButton(onClick = { onConfirm() }) {
-                Text("Aceptar")
+                Text("Aceptar", color = MaterialTheme.colorScheme.onBackground)
             }
         },
         title = { Text(text = texto) },
@@ -120,7 +125,7 @@ fun DialogoCambiaContrasena(
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
         confirmButton = {
             TextButton(onClick = { onConfirm() }) {
-                Text("Aceptar")
+                Text("Aceptar", color = MaterialTheme.colorScheme.onBackground)
             }
         },
         title = {
@@ -160,7 +165,7 @@ fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit) {
                     onItemSelected("Chico")
                 }
             )
-            Text("Chico")
+            Text("Chico", color = MaterialTheme.colorScheme.onBackground)
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -173,7 +178,7 @@ fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit) {
                     onItemSelected("Chica")
                 }
             )
-            Text("Chica")
+            Text("Chica", color = MaterialTheme.colorScheme.onBackground)
         }
     }
 
@@ -185,9 +190,10 @@ fun IconoVolver(navigateToBack: () -> Unit) {
         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
         contentDescription = "Volver",
         modifier = Modifier
-            .padding(10.dp)
+            .padding(start = 5.dp)
             .size(30.dp)
-            .clickable { navigateToBack() }
+            .clickable { navigateToBack() },
+        tint = MaterialTheme.colorScheme.onBackground
     )
 }
 
@@ -393,9 +399,6 @@ fun SearchView(
         value = busqueda,
         onValueChange = onQueryChanged,
         label = { Text(placeholder) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
         leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = null) },
         singleLine = true,
         maxLines = 1
@@ -425,7 +428,7 @@ fun DropMenuCategorias(edad: Int, onValueChange: (String) -> Unit) {
             enabled = false,
             readOnly = true,
             modifier = Modifier
-                .fillMaxWidth()
+                .width(360.dp)
                 .clickable { expanded = true },
             colors = TextFieldDefaults.colors(Color.Black)
         )
