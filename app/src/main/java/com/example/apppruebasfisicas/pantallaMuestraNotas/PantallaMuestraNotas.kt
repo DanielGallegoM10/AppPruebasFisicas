@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.apppruebasfisicas.componentes.IconoVolver
 import com.example.apppruebasfisicas.componentes.ListaNotasObtenidas
+import com.example.apppruebasfisicas.componentes.Titulo
 
 @Composable
 fun PantallaMuestraNotas(idUsuario: Int, navigateToBack: () -> Unit){
@@ -30,10 +31,9 @@ fun PantallaMuestraNotas(idUsuario: Int, navigateToBack: () -> Unit){
             IconoVolver { navigateToBack() }
         }
         Spacer(modifier = Modifier.height(10.dp))
-        Text("Notas obtenidas por prueba y edad", fontSize = 20.sp, fontFamily = FontFamily.Cursive, fontWeight = FontWeight.Bold)
+        Titulo("Notas obtenidas por prueba y edad")
         Spacer(modifier = Modifier.height(10.dp))
 
         ListaNotasObtenidas(idUsuario)
-
     }
 }

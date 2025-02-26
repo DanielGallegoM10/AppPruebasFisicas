@@ -44,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -87,6 +88,7 @@ fun Titulo(texto: String) {
         modifier = Modifier.padding(20.dp),
         fontSize = 30.sp,
         textAlign = TextAlign.Center,
+        fontFamily = FontFamily.Cursive,
         fontWeight = FontWeight.Bold,
     )
 }
@@ -342,13 +344,31 @@ fun getPruebasFisicas(edad: Int): List<PruebaFisicaObj> {
 }
 
 @Composable
+fun ElementoNota(nota: NotaObj){
+    Card(
+        border = BorderStroke(2.dp, Color.Cyan)
+    ) {
+        Column(
+            Modifier.padding(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(nota.nombrePrueba, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text("Sexo: " + nota.sexo)
+            Text("Edad: " + nota.edad)
+            Text("Marca: " + nota.marca)
+            Text("Nota: " + nota.nota)
+        }
+    }
+}
+
+@Composable
 fun ListaNotasObtenidas(idUsuario: Int){
     val listaNotas = getNotasObtenidas(idUsuario)
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(listaNotas) { nota ->
-            Text(nota.nombrePrueba + ": sexo: " + nota.sexo + " edad: " + nota.edad + " marca registrada: " + nota.marca + " nota: " + nota.nota, modifier = Modifier.padding(8.dp))
+            ElementoNota(nota)
         }
     }
 }

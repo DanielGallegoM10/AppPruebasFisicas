@@ -26,6 +26,7 @@ import com.example.apppruebasfisicas.componentes.Boton
 import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.IconoVolver
+import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.NotaObj
 
 @Composable
@@ -54,12 +55,7 @@ fun PantallaDetallePrueba(nombrePrueba: String, edad: Int, sexo: String, idUsuar
             IconoVolver { navigateToBack() }
         }
         Spacer(modifier = Modifier.weight(1f))
-        Text(
-            text = "Prueba de: $nombrePrueba",
-            fontSize = 30.sp,
-            fontFamily = FontFamily.Cursive,
-            fontWeight = FontWeight.ExtraBold
-        )
+        Titulo("Prueba de: $nombrePrueba")
         Spacer(modifier = Modifier.weight(1f))
 
         CuadroTexto(textoMarca, "Dime la marca") { textoMarca = it }

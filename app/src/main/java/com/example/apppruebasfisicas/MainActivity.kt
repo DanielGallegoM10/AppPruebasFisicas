@@ -23,7 +23,8 @@ class MainActivity : ComponentActivity() {
             AppPruebasFisicasTheme {
                 val bdd = BDDPruebasFisicas(this)
                 val db = bdd.writableDatabase
-                bdd.onUpgrade(db, 0, 0)
+                //Si deseas reiniciar las tablas de la base de datos, descomenta la siguiente línea
+//                bdd.onUpgrade(db, 0, 0)
                 NavegacionPrincipal()
             }
         }
