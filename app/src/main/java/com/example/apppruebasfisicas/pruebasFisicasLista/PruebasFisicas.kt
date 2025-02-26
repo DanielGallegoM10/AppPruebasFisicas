@@ -24,7 +24,7 @@ import com.example.apppruebasfisicas.componentes.ListaDePruebas
 import com.example.apppruebasfisicas.componentes.SearchView
 
 @Composable
-fun PruebasFisicasLista(edad: Int, navigateToBack: () -> Unit){
+fun PruebasFisicasLista(edad: Int, navigateToBack: () -> Unit, onItemSelected: (String) -> Unit){
     var busqueda by rememberSaveable { mutableStateOf("") }
     var categoriaSeleccionada by rememberSaveable { mutableStateOf("") }
     Column(
@@ -46,7 +46,7 @@ fun PruebasFisicasLista(edad: Int, navigateToBack: () -> Unit){
         }
         DropMenuCategorias(edad) { categoriaSeleccionada = it }
         ListaDePruebas(edad, busqueda, categoriaSeleccionada, onItemSelected = {
-            //Esto me llevara a la pantalla del detalle
+            onItemSelected(it.nombre)
         })
     }
 }

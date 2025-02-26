@@ -23,15 +23,21 @@ open class BDDPruebasFisicas(context: Context) :
 
     private val borrarTablaDatos = "DROP TABLE IF EXISTS datos"
 
+    private val crearTablaNotas = "CREATE TABLE notas (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER, nombrePrueba TEXT, edad INTEGER, marca TEXT, nota TEXT)"
+
+    private val borrarTablaNotas = "DROP TABLE IF EXISTS notas"
+
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(crearTablaLogin)
         db?.execSQL(insertarLogin)
         db?.execSQL(crearTablaDatos)
+        db?.execSQL(crearTablaNotas)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL(borrarTablaLogin)
         db?.execSQL(borrarTablaDatos)
+        db?.execSQL(borrarTablaNotas)
 
         onCreate(db)
     }

@@ -112,14 +112,16 @@ fun PantallaPrincipal(idUsuario: Int, navigateToBack: () -> Unit, navigateToPrue
                 } else {
                     val datosObj = DatosObj(idUsuario, edad.toInt(), peso.toInt(), altura.toInt(), textoSexo)
 
-                    val datosExistentes = datosHelper.obtenerDatosPorUsuario(idUsuario)
+//                    val datosExistentes = datosHelper.obtenerDatosPorUsuario(idUsuario)
 
-                    if (datosExistentes != null) {
-                        datosObj.id = datosExistentes.id
-                        datosHelper.actualizarDatos(datosObj)
-                    } else {
-                        datosHelper.guardarDatos(datosObj)
-                    }
+//                    if (datosExistentes != null) {
+//                        datosObj.id = datosExistentes.id
+//                        datosHelper.actualizarDatos(datosObj)
+//                    } else {
+//                    datosHelper.guardarDatos(datosObj)
+//                    }
+                    datosHelper.guardarDatos(datosObj)
+
                     navigateToPruebasFisicas(edad.toInt())
                 }
             }

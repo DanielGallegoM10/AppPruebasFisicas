@@ -38,3 +38,21 @@ data class PruebaFisicaObj(
     val categoria: String,
     @DrawableRes val imagen : Int
 )
+
+@Serializable
+data class NotaObj(
+    val id : Int,
+    val idUsuario : Int,
+    val nombrePrueba : String,
+    val edad: Int,
+    val marca : String,
+    val nota : String
+){
+    constructor(
+        idUsuario : Int,
+        nombrePrueba : String,
+        edad: Int,
+        marca : String,
+        nota : String
+    ): this(0, idUsuario, nombrePrueba, edad, marca, nota)
+}

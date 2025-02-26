@@ -9,9 +9,11 @@ import androidx.navigation.toRoute
 import com.example.apppruebasfisicas.entidades.DatosObj
 import com.example.apppruebasfisicas.entidades.LoginObj
 import com.example.apppruebasfisicas.login.PantallaLogin
+import com.example.apppruebasfisicas.navegacion.DetallePrueba
 import com.example.apppruebasfisicas.navegacion.Login
 import com.example.apppruebasfisicas.navegacion.Principal
 import com.example.apppruebasfisicas.navegacion.PruebasFisicas
+import com.example.apppruebasfisicas.pantallaDetallePrueba.PantallaDetallePrueba
 import com.example.apppruebasfisicas.pantallaPrincipal.PantallaPrincipal
 import com.example.apppruebasfisicas.pruebasFisicasLista.PruebasFisicasLista
 
@@ -39,7 +41,7 @@ fun NavegacionPrincipal() {
                     }
                 },
                 navigateToPruebasFisicas = { edad ->
-                    navController.navigate(PruebasFisicas(edad = edad))
+                    navController.navigate(PruebasFisicas(edad = edad, idUsuario = usuario.idUsuario))
                 }
             )
         }
@@ -48,15 +50,28 @@ fun NavegacionPrincipal() {
             PruebasFisicasLista(
                 edad = usuario.edad,
                 navigateToBack = {
-                    val previousEntry = navController.previousBackStackEntry
-                    val idUsuario = previousEntry?.arguments?.getInt("idUsuario") ?: 0
-                    navController.navigate(Principal(idUsuario = idUsuario)) {
+                    navController.navigate(Principal(idUsuario = usuario.idUsuario)) {
                         popUpTo(Principal::class) {
                             inclusive = true
                         }
                     }
+                },
+                onItemSelected = { nombrePrueba ->
+                    navController.navigate(DetallePrueba(nombrePrueba = nombrePrueba, edad = usuario.edad, idUsuario = usuario.idUsuario))
                 }
             )
+        }
+        composable<DetallePrueba> { backStackEntry ->
+            val detallePrueba: DetallePrueba = backStackEntry.toRoute()
+            PantallaDetallePrueba(
+                nombrePrueba = detallePrueba.nombrePrueba,
+                idUsuario = detallePrueba.idUsuario,
+                edad = detallePrueba.edad,
+            ) {
+                val previousEntry = navController.previousBackStackEntry
+                val edad = previousEntry?.arguments?.getInt("edad") ?: 0
+                navController.navigate(PruebasFisicas(edad = edad, idUsuario = detallePrueba.idUsuario))
+            }
         }
     }
 }
