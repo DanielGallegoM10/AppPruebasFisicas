@@ -17,6 +17,7 @@ data class LoginObj(
 data class DatosObj(
     var id : Int,
     val idUsuario : Int,
+    val nombreAlumno : String,
     val edad : Int,
     val peso : Int,
     val altura : Int,
@@ -24,11 +25,12 @@ data class DatosObj(
 ) {
     constructor(
         idUsuario : Int,
+        nombreAlumno : String,
         edad : Int,
         peso : Int,
         altura : Int,
         sexo : String
-    ): this(0, idUsuario, edad, peso, altura, sexo)
+    ): this(0, idUsuario, nombreAlumno, edad, peso, altura, sexo)
 }
 
 @Serializable
@@ -44,6 +46,7 @@ data class NotaObj(
     val id : Int,
     val idUsuario : Int,
     val nombrePrueba : String,
+    val nombreAlumno : String,
     val sexo : String,
     val edad: Int,
     val marca : String,
@@ -52,9 +55,10 @@ data class NotaObj(
     constructor(
         idUsuario : Int,
         nombrePrueba : String,
+        nombreAlumno : String,
         sexo : String,
         edad: Int,
         marca : String,
         nota : String
-    ): this(0, idUsuario, nombrePrueba, sexo, edad, marca, nota)
+    ): this(0, idUsuario, nombrePrueba, nombreAlumno, sexo, edad, marca, nota)
 }

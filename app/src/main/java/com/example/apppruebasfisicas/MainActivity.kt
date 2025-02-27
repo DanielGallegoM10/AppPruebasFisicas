@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
             val bdd = BDDPruebasFisicas(this)
             val db = bdd.writableDatabase
             //Si deseas reiniciar las tablas de la base de datos, descomenta la siguiente línea
-                bdd.onUpgrade(db, 0, 0)
+//                bdd.onUpgrade(db, 0, 0)
 
             val context = LocalContext.current
 

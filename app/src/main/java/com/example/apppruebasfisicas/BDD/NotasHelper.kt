@@ -23,6 +23,7 @@ class NotasHelper(context: Context) : BDDPruebasFisicas(context) {
             }
             values.put("idUsuario", nota.idUsuario)
             values.put("nombrePrueba", nota.nombrePrueba)
+            values.put("nombreAlumno", nota.nombreAlumno)
             values.put("sexo", nota.sexo)
             values.put("edad", nota.edad)
             values.put("marca", nota.marca)
@@ -55,6 +56,7 @@ class NotasHelper(context: Context) : BDDPruebasFisicas(context) {
             val values = ContentValues().apply {
                 put("idUsuario", nota.idUsuario)
                 put("nombrePrueba", nota.nombrePrueba)
+                put("nombreAlumno", nota.nombreAlumno)
                 put("sexo", nota.sexo)
                 put("marca", nota.marca)
                 put("edad", nota.edad)
@@ -89,6 +91,7 @@ class NotasHelper(context: Context) : BDDPruebasFisicas(context) {
                     cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     cursor.getInt(cursor.getColumnIndexOrThrow("idUsuario")),
                     cursor.getString(cursor.getColumnIndexOrThrow("nombrePrueba")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("nombreAlumno")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sexo")),
                     cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
                     cursor.getString(cursor.getColumnIndexOrThrow("marca")),

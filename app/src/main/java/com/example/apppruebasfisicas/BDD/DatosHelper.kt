@@ -20,6 +20,7 @@ class DatosHelper(context: Context) : BDDPruebasFisicas(context){
                 values.put("id", datos.id)
             }
             values.put("idUsuario", datos.idUsuario)
+            values.put("nombreAlumno", datos.nombreAlumno)
             values.put("edad", datos.edad)
             values.put("peso", datos.peso)
             values.put("altura", datos.altura)
@@ -49,6 +50,7 @@ class DatosHelper(context: Context) : BDDPruebasFisicas(context){
         try {
             val values = ContentValues().apply {
                 put("idUsuario", datos.idUsuario)
+                put("nombreAlumno", datos.nombreAlumno)
                 put("edad", datos.edad)
                 put("peso", datos.peso)
                 put("altura", datos.altura)
@@ -80,6 +82,7 @@ class DatosHelper(context: Context) : BDDPruebasFisicas(context){
             datosObj = DatosObj(
                 cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                 cursor.getInt(cursor.getColumnIndexOrThrow("idUsuario")),
+                cursor.getString(cursor.getColumnIndexOrThrow("nombreAlumno")),
                 cursor.getInt(cursor.getColumnIndexOrThrow("edad")),
                 cursor.getInt(cursor.getColumnIndexOrThrow("peso")),
                 cursor.getInt(cursor.getColumnIndexOrThrow("altura")),

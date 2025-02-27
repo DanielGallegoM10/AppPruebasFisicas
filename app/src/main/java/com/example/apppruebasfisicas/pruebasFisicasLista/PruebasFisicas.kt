@@ -26,7 +26,7 @@ import com.example.apppruebasfisicas.componentes.SearchView
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
 @Composable
-fun PruebasFisicasLista(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, edad: Int, navigateToBack: () -> Unit, onItemSelected: (String) -> Unit){
+fun PruebasFisicasLista(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, nombreUsuario: String, edad: Int, navigateToBack: () -> Unit, onItemSelected: (String) -> Unit){
     var busqueda by rememberSaveable { mutableStateOf("") }
     var categoriaSeleccionada by rememberSaveable { mutableStateOf("") }
     val context = LocalContext.current

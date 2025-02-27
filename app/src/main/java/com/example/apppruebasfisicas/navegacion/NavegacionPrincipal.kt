@@ -49,8 +49,8 @@ fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit
                         }
                     }
                 },
-                navigateToPruebasFisicas = { edad, sexo ->
-                    navController.navigate(PruebasFisicas(themeMode, edad = edad, sexo = sexo, idUsuario = usuario.idUsuario))
+                navigateToPruebasFisicas = { edad, sexo, nombreUsuario ->
+                    navController.navigate(PruebasFisicas(themeMode, nombreUsuario = nombreUsuario, edad = edad, sexo = sexo, idUsuario = usuario.idUsuario))
                 },
                 navigateToMuestraNotas = { idUsuario ->
                     navController.navigate(MuestraNotas(themeMode, idUsuario = idUsuario))
@@ -62,6 +62,7 @@ fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit
             PruebasFisicasLista(
                 themeMode = themeMode,
                 onThemeChange = onThemeChange,
+                nombreUsuario = usuario.nombreUsuario,
                 edad = usuario.edad,
                 navigateToBack = {
                     navController.navigate(Principal(themeMode, idUsuario = usuario.idUsuario)) {
@@ -71,7 +72,7 @@ fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit
                     }
                 },
                 onItemSelected = { nombrePrueba ->
-                    navController.navigate(DetallePrueba(themeMode, nombrePrueba = nombrePrueba, sexo = usuario.sexo, edad = usuario.edad, idUsuario = usuario.idUsuario))
+                    navController.navigate(DetallePrueba(themeMode, nombrePrueba = nombrePrueba, nombreUsuario = usuario.nombreUsuario, sexo = usuario.sexo, edad = usuario.edad, idUsuario = usuario.idUsuario))
                 }
             )
         }
@@ -81,6 +82,7 @@ fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit
                 themeMode = themeMode,
                 onThemeChange = onThemeChange,
                 nombrePrueba = detallePrueba.nombrePrueba,
+                nombreUsuario = detallePrueba.nombreUsuario,
                 idUsuario = detallePrueba.idUsuario,
                 edad = detallePrueba.edad,
                 sexo = detallePrueba.sexo,
@@ -88,7 +90,7 @@ fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit
             ) {
                 val previousEntry = navController.previousBackStackEntry
                 val edad = previousEntry?.arguments?.getInt("edad") ?: 0
-                navController.navigate(PruebasFisicas(themeMode, edad = edad, sexo = detallePrueba.sexo, idUsuario = detallePrueba.idUsuario))
+                navController.navigate(PruebasFisicas(themeMode, nombreUsuario = detallePrueba.nombreUsuario, edad = edad, sexo = detallePrueba.sexo, idUsuario = detallePrueba.idUsuario))
             }
         }
         composable<MuestraNotas> { backStackEntry ->

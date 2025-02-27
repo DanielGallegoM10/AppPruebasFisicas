@@ -32,13 +32,12 @@ import com.example.apppruebasfisicas.entidades.NotaObj
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
 @Composable
-fun PantallaDetallePrueba(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, nombrePrueba: String, edad: Int, sexo: String, idUsuario: Int, navigateToBack: () -> Unit) {
+fun PantallaDetallePrueba(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, nombrePrueba: String, nombreUsuario: String, edad: Int, sexo: String, idUsuario: Int, navigateToBack: () -> Unit) {
     var textoMarca by rememberSaveable { mutableStateOf("") }
 
     val datosHelper = DatosHelper(LocalContext.current)
 
     var notaCalculada by rememberSaveable { mutableStateOf("") }
-
 
     val notaHelper = NotasHelper(LocalContext.current)
 
@@ -97,7 +96,7 @@ fun PantallaDetallePrueba(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Un
                 "La nota obtenida es: $notaCalculada",
                 { dialogoCorrecto = false },
                 {
-                    notaObtenida = NotaObj(idUsuario, nombrePrueba, sexo, edad, textoMarca, notaCalculada)
+                    notaObtenida = NotaObj(idUsuario, nombreUsuario, nombrePrueba, sexo, edad, textoMarca, notaCalculada)
                     notaHelper.guardarNota(notaObtenida)
                     dialogoCorrecto = false })
         }

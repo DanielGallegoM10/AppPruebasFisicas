@@ -352,6 +352,7 @@ fun getPruebasFisicas(edad: Int): List<PruebaFisicaObj> {
 @Composable
 fun ElementoNota(nota: NotaObj){
     Card(
+        Modifier.width(200.dp),
         border = BorderStroke(2.dp, Color.Cyan)
     ) {
         Column(
@@ -359,6 +360,7 @@ fun ElementoNota(nota: NotaObj){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(nota.nombrePrueba, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text("Alumno: " + nota.nombreAlumno)
             Text("Sexo: " + nota.sexo)
             Text("Edad: " + nota.edad)
             Text("Marca: " + nota.marca)

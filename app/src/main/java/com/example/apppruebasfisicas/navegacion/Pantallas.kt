@@ -10,10 +10,10 @@ object Login
 data class Principal(val themeMode: ThemeMode, val idUsuario: Int)
 
 @Serializable
-data class PruebasFisicas(val themeMode: ThemeMode, val edad: Int, val sexo: String, val idUsuario: Int)
+data class PruebasFisicas(val themeMode: ThemeMode, val nombreUsuario: String, val edad: Int, val sexo: String, val idUsuario: Int)
 
 @Serializable
-data class DetallePrueba(val themeMode: ThemeMode, val nombrePrueba: String, val sexo: String, val edad: Int, val idUsuario: Int)
+data class DetallePrueba(val themeMode: ThemeMode, val nombrePrueba: String, val nombreUsuario: String, val sexo: String, val edad: Int, val idUsuario: Int)
 
 @Serializable
 data class MuestraNotas(val themeMode: ThemeMode, val idUsuario: Int)

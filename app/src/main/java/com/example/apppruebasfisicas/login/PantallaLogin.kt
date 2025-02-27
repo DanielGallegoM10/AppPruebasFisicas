@@ -85,12 +85,11 @@ fun PantallaLogin(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, navi
                 incorrectoDatos = true
             }else{
                 usuarioEncontrado = loginHelper.getUsuario(textoUsuario, textoPass)
-                idUsuario = usuarioEncontrado!!.id
                 if (usuarioEncontrado == null) {
                     incorrectoDatos = true
                 }else{
                     nombreUsuarioEncontrado = usuarioEncontrado!!.usuario
-
+                    idUsuario = usuarioEncontrado!!.id
                     navigateToPrincipal(idUsuario)
                 }
             }

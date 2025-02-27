@@ -42,7 +42,7 @@ import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
 //@Preview(showBackground = true)
 @Composable
-fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int, String) -> Unit, navigateToMuestraNotas: (Int) -> Unit) {
+fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int, String, String) -> Unit, navigateToMuestraNotas: (Int) -> Unit) {
     val context = LocalContext.current
     Column(
         Modifier.fillMaxSize(),
@@ -69,6 +69,7 @@ fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, 
             var peso by rememberSaveable { mutableStateOf("") }
             var altura by rememberSaveable { mutableStateOf("") }
             var textoSexo by rememberSaveable { mutableStateOf("") }
+            var nombreAlumno by rememberSaveable { mutableStateOf("") }
             var imcTexto by rememberSaveable { mutableStateOf("") }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -105,6 +106,9 @@ fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, 
                 Text("Error al cargar el usuario", color = MaterialTheme.colorScheme.onBackground)
             }
             Spacer(modifier = Modifier.weight(1f))
+            CuadroTexto(nombreAlumno, "Introduzca el nombre del alumno") { nombreAlumno = it }
+
+            Spacer(modifier = Modifier.weight(1f))
             CuadroTexto(edad, "Introduzca su edad") { edad = it }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -121,10 +125,10 @@ fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, 
                 if (edad.isEmpty() || peso.isEmpty() || altura.isEmpty() || textoSexo.isEmpty()) {
                     dialogoErrorDatos = true
                 } else {
-                    val datosObj = DatosObj(idUsuario, edad.toInt(), peso.toInt(), altura.toInt(), textoSexo)
+                    val datosObj = DatosObj(idUsuario, nombreAlumno, edad.toInt(), peso.toInt(), altura.toInt(), textoSexo)
                     datosHelper.guardarDatos(datosObj)
 
-                    navigateToPruebasFisicas(edad.toInt(), textoSexo)
+                    navigateToPruebasFisicas(edad.toInt(), nombreAlumno ,textoSexo)
                 }
             }
             Spacer(modifier = Modifier.weight(1f))

@@ -13,8 +13,8 @@ fun calcularNota(nombrePrueba: String, resultado: Float, edad: Int, sexo: String
 
 fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
     return when (sexo) {
-        "Chico" -> when (edad) {
-            12 -> when {
+        "Chico" -> when {
+            edad <= 12 -> when {
                 resultado >= 30 -> "10"
                 resultado >= 29 -> "9.5"
                 resultado >= 28 -> "9"
@@ -32,9 +32,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 16 -> "3"
                 resultado >= 15 -> "2.5"
                 resultado >= 14 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            13 -> when {
+            edad == 13 -> when {
                 resultado >= 32 -> "10"
                 resultado >= 31 -> "9.5"
                 resultado >= 30 -> "9"
@@ -52,9 +52,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 18 -> "3"
                 resultado >= 17 -> "2.5"
                 resultado >= 16 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            14 -> when {
+            edad == 14 -> when {
                 resultado >= 33 -> "10"
                 resultado >= 32 -> "9.5"
                 resultado >= 31 -> "9"
@@ -72,9 +72,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 19 -> "3"
                 resultado >= 18 -> "2.5"
                 resultado >= 17 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            15 -> when {
+            edad == 15 -> when {
                 resultado >= 36 -> "10"
                 resultado >= 35 -> "9.5"
                 resultado >= 34 -> "9"
@@ -92,9 +92,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 22 -> "3"
                 resultado >= 21 -> "2.5"
                 resultado >= 20 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 38 -> "10"
                 resultado >= 37 -> "9.5"
                 resultado >= 36 -> "9"
@@ -112,13 +112,12 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 24 -> "3"
                 resultado >= 23 -> "2.5"
                 resultado >= 22 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
 
-        "Chica" -> when (edad) {
-            12 -> when {
+        "Chica" -> when{
+            edad <= 12 -> when {
                 resultado >= 30 -> "10"
                 resultado >= 29 -> "9.5"
                 resultado >= 28 -> "9"
@@ -136,9 +135,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 16 -> "3"
                 resultado >= 15 -> "2.5"
                 resultado >= 14 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            13 -> when {
+            edad == 13 -> when {
                 resultado >= 32 -> "10"
                 resultado >= 31 -> "9.5"
                 resultado >= 30 -> "9"
@@ -156,9 +155,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 18 -> "3"
                 resultado >= 17 -> "2.5"
                 resultado >= 16 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            14 -> when {
+            edad == 14 -> when {
                 resultado >= 33 -> "10"
                 resultado >= 32 -> "9.5"
                 resultado >= 31 -> "9"
@@ -176,9 +175,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 19 -> "3"
                 resultado >= 18 -> "2.5"
                 resultado >= 17 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            15 -> when {
+            edad == 15 -> when {
                 resultado >= 35 -> "10"
                 resultado >= 34 -> "9.5"
                 resultado >= 33 -> "9"
@@ -196,9 +195,9 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 21 -> "3"
                 resultado >= 20 -> "2.5"
                 resultado >= 19 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 37 -> "10"
                 resultado >= 36 -> "9.5"
                 resultado >= 35 -> "9"
@@ -216,9 +215,8 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 23 -> "3"
                 resultado >= 22 -> "2.5"
                 resultado >= 21 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
         else -> "N/A"
     }
@@ -226,8 +224,8 @@ fun calcularNotaAbdominales(resultado: Float, edad: Int, sexo: String): String {
 
 fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String {
     return when (sexo) {
-        "Chico" -> when (edad) {
-            12 -> when {
+        "Chico" -> when {
+            edad <= 12 -> when {
                 resultado >= 7 -> "10"
                 resultado >= 5 -> "9.5"
                 resultado >= 3 -> "9"
@@ -245,9 +243,9 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
                 resultado >= -18 -> "3"
                 resultado >= -20 -> "2.5"
                 resultado >= -22 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            13 -> when {
+            edad == 13 -> when {
                 resultado >= 12 -> "10"
                 resultado >= 10 -> "9.5"
                 resultado >= 8 -> "9"
@@ -265,9 +263,9 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
                 resultado >= -12 -> "3"
                 resultado >= -14 -> "2.5"
                 resultado >= -16 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            14 -> when {
+            edad == 14 -> when {
                 resultado >= 13 -> "10"
                 resultado >= 11 -> "9.5"
                 resultado >= 9 -> "9"
@@ -285,9 +283,9 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
                 resultado >= -13 -> "3"
                 resultado >= -15 -> "2.5"
                 resultado >= -17 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            15, 16 -> when {
+            else -> when {
                 resultado >= 15 -> "10"
                 resultado >= 13 -> "9.5"
                 resultado >= 11 -> "9"
@@ -305,13 +303,12 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
                 resultado >= -8 -> "3"
                 resultado >= -10 -> "2.5"
                 resultado >= -12 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
 
-        "Chica" -> when (edad) {
-            12 -> when {
+        "Chica" -> when {
+            edad <= 12 -> when {
                 resultado >= 7 -> "10"
                 resultado >= 5 -> "9.5"
                 resultado >= 3 -> "9"
@@ -329,9 +326,9 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
                 resultado >= -18 -> "3"
                 resultado >= -20 -> "2.5"
                 resultado >= -22 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            13 -> when {
+            edad == 13 -> when {
                 resultado >= 12 -> "10"
                 resultado >= 10 -> "9.5"
                 resultado >= 8 -> "9"
@@ -349,9 +346,9 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
                 resultado >= -12 -> "3"
                 resultado >= -14 -> "2.5"
                 resultado >= -16 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            14, 15, 16 -> when {
+            else -> when {
                 resultado >= 17 -> "10"
                 resultado >= 15 -> "9.5"
                 resultado >= 13 -> "9"
@@ -369,9 +366,8 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
                 resultado >= -6 -> "3"
                 resultado >= -8 -> "2.5"
                 resultado >= -10 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
         else -> "N/A"
     }
@@ -379,8 +375,8 @@ fun calcularNotaFlexibilidad(resultado: Float, edad: Int, sexo: String): String 
 
 fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
     return when (sexo) {
-        "Chico" -> when (edad) {
-            12 -> when {
+        "Chico" -> when {
+            edad <= 12 -> when {
                 resultado >= 2600 -> "10"
                 resultado >= 2400 -> "9.5"
                 resultado >= 2200 -> "9"
@@ -398,9 +394,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1500 -> "3"
                 resultado >= 1450 -> "2.5"
                 resultado >= 1400 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            13 -> when {
+            edad == 13 -> when {
                 resultado >= 2650 -> "10"
                 resultado >= 2475 -> "9.5"
                 resultado >= 2300 -> "9"
@@ -418,9 +414,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1600 -> "3"
                 resultado >= 1550 -> "2.5"
                 resultado >= 1500 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            14 -> when {
+            edad == 14 -> when {
                 resultado >= 2650 -> "10"
                 resultado >= 2525 -> "9.5"
                 resultado >= 2400 -> "9"
@@ -438,9 +434,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1700 -> "3"
                 resultado >= 1650 -> "2.5"
                 resultado >= 1600 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            15 -> when {
+            edad == 15 -> when {
                 resultado >= 2750 -> "10"
                 resultado >= 2625 -> "9.5"
                 resultado >= 2500 -> "9"
@@ -458,9 +454,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1800 -> "3"
                 resultado >= 1750 -> "2.5"
                 resultado >= 1700 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 2800 -> "10"
                 resultado >= 2650 -> "9.5"
                 resultado >= 2500 -> "9"
@@ -478,13 +474,12 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1900 -> "3"
                 resultado >= 1850 -> "2.5"
                 resultado >= 1800 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
 
-        "Chica" -> when (edad) {
-            12 -> when {
+        "Chica" -> when {
+            edad <= 12 -> when {
                 resultado >= 2200 -> "10"
                 resultado >= 2100 -> "9.5"
                 resultado >= 2000 -> "9"
@@ -492,7 +487,7 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1800 -> "8"
                 resultado >= 1750 -> "7.5"
                 resultado >= 1700 -> "7"
-                resultado >= 1550 -> "6.5"
+                resultado >= 1650 -> "6.5"
                 resultado >= 1600 -> "6"
                 resultado >= 1550 -> "5.5"
                 resultado >= 1500 -> "5"
@@ -502,9 +497,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1300 -> "3"
                 resultado >= 1250 -> "2.5"
                 resultado >= 1200 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            13 -> when {
+            edad == 13 -> when {
                 resultado >= 2100 -> "10"
                 resultado >= 2050 -> "9.5"
                 resultado >= 2000 -> "9"
@@ -522,9 +517,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1400 -> "3"
                 resultado >= 1350 -> "2.5"
                 resultado >= 1300 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            14 -> when {
+            edad == 14 -> when {
                 resultado >= 2200 -> "10"
                 resultado >= 2050 -> "9.5"
                 resultado >= 1900 -> "9"
@@ -542,9 +537,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1300 -> "3"
                 resultado >= 1250 -> "2.5"
                 resultado >= 1200 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            15 -> when {
+            edad == 15 -> when {
                 resultado >= 2250 -> "10"
                 resultado >= 2150 -> "9.5"
                 resultado >= 2050 -> "9"
@@ -562,9 +557,9 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1400 -> "3"
                 resultado >= 1350 -> "2.5"
                 resultado >= 1300 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 2300 -> "10"
                 resultado >= 2200 -> "9.5"
                 resultado >= 2100 -> "9"
@@ -582,9 +577,8 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 1450 -> "3"
                 resultado >= 1400 -> "2.5"
                 resultado >= 1350 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
         else -> "N/A"
     }
@@ -593,8 +587,8 @@ fun calcularNotaTestCooper(resultado: Float, edad: Int, sexo: String): String {
 
 fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
     return when (sexo) {
-        "Chico" -> when (edad) {
-            14 -> when {
+        "Chico" -> when {
+            edad <= 14 -> when {
                 resultado >= 15.6 -> "2"
                 resultado >= 15.4 -> "2.5"
                 resultado >= 15.2 -> "3"
@@ -611,9 +605,9 @@ fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 12.8 -> "8.5"
                 resultado >= 12.6 -> "9"
                 resultado >= 11.0 -> "10"
-                else -> "N/A"
+                else -> "2"
             }
-            15 -> when {
+            edad == 15 -> when {
                 resultado >= 15.3 -> "2"
                 resultado >= 15.1 -> "2.5"
                 resultado >= 14.9 -> "3"
@@ -631,9 +625,9 @@ fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 12.5 -> "9"
                 resultado >= 12.3 -> "9.5"
                 resultado >= 11.0 -> "10"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 15.0 -> "2"
                 resultado >= 14.8 -> "2.5"
                 resultado >= 14.6 -> "3"
@@ -651,12 +645,11 @@ fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 12.2 -> "9"
                 resultado >= 12.0 -> "9.5"
                 resultado >= 11.0 -> "10"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
-        "Chica" -> when (edad) {
-            14 -> when {
+        "Chica" -> when {
+            edad <= 14 -> when {
                 resultado >= 16.4 -> "2"
                 resultado >= 16.2 -> "2.5"
                 resultado >= 16.0 -> "3"
@@ -674,9 +667,9 @@ fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 13.6 -> "9"
                 resultado >= 13.4 -> "9.5"
                 resultado >= 11.0 -> "10"
-                else -> "N/A"
+                else -> "2"
             }
-            15 -> when {
+            edad == 15 -> when {
                 resultado >= 16.1 -> "2"
                 resultado >= 15.9 -> "2.5"
                 resultado >= 15.7 -> "3"
@@ -694,9 +687,9 @@ fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 13.3 -> "9"
                 resultado >= 13.1 -> "9.5"
                 resultado >= 11.0 -> "10"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 15.8 -> "2"
                 resultado >= 15.6 -> "2.5"
                 resultado >= 15.4 -> "3"
@@ -714,9 +707,8 @@ fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 13.0 -> "9"
                 resultado >= 12.8 -> "9.5"
                 resultado >= 11.0 -> "10"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
         else -> "N/A"
     }
@@ -725,8 +717,8 @@ fun calcularNotaVelocidad(resultado: Float, edad: Int, sexo: String): String {
 
 fun calcularNotaLanzamiento(resultado: Float, edad: Int, sexo: String): String {
     return when (sexo) {
-        "Chico" -> when (edad) {
-            15 -> when {
+        "Chico" -> when {
+            edad <= 15 -> when {
                 resultado >= 8.50 -> "10"
                 resultado >= 8.20 -> "9.5"
                 resultado >= 7.90 -> "9"
@@ -744,9 +736,9 @@ fun calcularNotaLanzamiento(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 4.40 -> "3"
                 resultado >= 4.10 -> "2.5"
                 resultado >= 3.80 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 8.70 -> "10"
                 resultado >= 8.40 -> "9.5"
                 resultado >= 8.10 -> "9"
@@ -764,13 +756,12 @@ fun calcularNotaLanzamiento(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 5.10 -> "3"
                 resultado >= 4.90 -> "2.5"
                 resultado >= 4.70 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
 
-        "Chica" -> when (edad) {
-            15 -> when {
+        "Chica" -> when {
+            edad <= 15 -> when {
                 resultado >= 8.50 -> "10"
                 resultado >= 8.20 -> "9.5"
                 resultado >= 7.90 -> "9"
@@ -788,9 +779,9 @@ fun calcularNotaLanzamiento(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 4.40 -> "3"
                 resultado >= 4.10 -> "2.5"
                 resultado >= 3.80 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            16 -> when {
+            else -> when {
                 resultado >= 8.70 -> "10"
                 resultado >= 8.40 -> "9.5"
                 resultado >= 8.10 -> "9"
@@ -808,9 +799,8 @@ fun calcularNotaLanzamiento(resultado: Float, edad: Int, sexo: String): String {
                 resultado >= 5.10 -> "3"
                 resultado >= 4.90 -> "2.5"
                 resultado >= 4.70 -> "2"
-                else -> "N/A"
+                else -> "2"
             }
-            else -> "N/A"
         }
         else -> "N/A"
     }
