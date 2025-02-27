@@ -62,7 +62,6 @@ fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit
             PruebasFisicasLista(
                 themeMode = themeMode,
                 onThemeChange = onThemeChange,
-                nombreUsuario = usuario.nombreUsuario,
                 edad = usuario.edad,
                 navigateToBack = {
                     navController.navigate(Principal(themeMode, idUsuario = usuario.idUsuario)) {
@@ -82,15 +81,12 @@ fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit
                 themeMode = themeMode,
                 onThemeChange = onThemeChange,
                 nombrePrueba = detallePrueba.nombrePrueba,
-                nombreUsuario = detallePrueba.nombreUsuario,
-                idUsuario = detallePrueba.idUsuario,
+                nombreAlumno = detallePrueba.nombreUsuario,
                 edad = detallePrueba.edad,
                 sexo = detallePrueba.sexo,
-
+                idUsuario = detallePrueba.idUsuario,
             ) {
-                val previousEntry = navController.previousBackStackEntry
-                val edad = previousEntry?.arguments?.getInt("edad") ?: 0
-                navController.navigate(PruebasFisicas(themeMode, nombreUsuario = detallePrueba.nombreUsuario, edad = edad, sexo = detallePrueba.sexo, idUsuario = detallePrueba.idUsuario))
+                navController.navigate(PruebasFisicas(themeMode, nombreUsuario = detallePrueba.nombreUsuario, edad = detallePrueba.edad, sexo = detallePrueba.sexo, idUsuario = detallePrueba.idUsuario))
             }
         }
         composable<MuestraNotas> { backStackEntry ->

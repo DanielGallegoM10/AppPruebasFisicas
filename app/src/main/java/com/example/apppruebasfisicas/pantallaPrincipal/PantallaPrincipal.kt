@@ -128,7 +128,7 @@ fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, 
                     val datosObj = DatosObj(idUsuario, nombreAlumno, edad.toInt(), peso.toInt(), altura.toInt(), textoSexo)
                     datosHelper.guardarDatos(datosObj)
 
-                    navigateToPruebasFisicas(edad.toInt(), nombreAlumno ,textoSexo)
+                    navigateToPruebasFisicas(edad.toInt(),textoSexo, nombreAlumno)
                 }
             }
             Spacer(modifier = Modifier.weight(1f))
