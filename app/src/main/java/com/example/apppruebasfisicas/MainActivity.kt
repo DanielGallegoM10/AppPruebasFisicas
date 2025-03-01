@@ -30,13 +30,10 @@ import com.example.apppruebasfisicas.ui.theme.AppPruebasFisicasTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val bdd = BDDPruebasFisicas(this)
-            val db = bdd.writableDatabase
-            //Si deseas reiniciar las tablas de la base de datos, descomenta la siguiente línea
-//                bdd.onUpgrade(db, 0, 0)
 
             val context = LocalContext.current
 
@@ -46,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background) // Aplica el color de fondo
+                        .background(MaterialTheme.colorScheme.background)
                 ) {
                     NavegacionPrincipal(themeMode) { newMode ->
                         themeMode = newMode

@@ -87,12 +87,14 @@ fun PantallaDetallePrueba(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Un
 
         if (dialogoIncorrecto) {
             CuadroDialogo(
+                "Marca incorrecta",
                 "La marca introducida no coincide con el Baremo EuroFit",
                 { dialogoIncorrecto = false },
                 { dialogoIncorrecto = false })
         }
         if (dialogoCorrecto) {
             CuadroDialogo(
+                "Nota calculada",
                 "La nota obtenida es: $notaCalculada",
                 { dialogoCorrecto = false },
                 {

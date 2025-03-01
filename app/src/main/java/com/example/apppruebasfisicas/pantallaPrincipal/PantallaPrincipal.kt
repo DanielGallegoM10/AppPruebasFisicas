@@ -37,6 +37,7 @@ import com.example.apppruebasfisicas.componentes.CuadroDialogo
 import com.example.apppruebasfisicas.componentes.CuadroTexto
 import com.example.apppruebasfisicas.componentes.IconoVolver
 import com.example.apppruebasfisicas.componentes.RadioButtomSexo
+import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.DatosObj
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
@@ -101,7 +102,7 @@ fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, 
             val loginHelper = LoginHelper(context = LocalContext.current)
             val usuarioEncontrado = loginHelper.getUsuarioPorID(idUsuario)
             if (usuarioEncontrado != null) {
-                Text("Bienvenido " + usuarioEncontrado.usuario + "!", fontSize = 30.sp, fontFamily = FontFamily.Cursive, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
+                Titulo("Bienvenido ${usuarioEncontrado.usuario}!")
             }else{
                 Text("Error al cargar el usuario", color = MaterialTheme.colorScheme.onBackground)
             }
@@ -134,10 +135,10 @@ fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, 
             Spacer(modifier = Modifier.weight(1f))
 
             if (dialogoImc) {
-                CuadroDialogo(imcTexto, { dialogoImc = false }, { dialogoImc = false })
+                CuadroDialogo("Calculo IMC",imcTexto, { dialogoImc = false }, { dialogoImc = false })
             }
             if (dialogoErrorDatos) {
-                CuadroDialogo("ERROR, alguno de los datos no ha sido introducido", { dialogoErrorDatos = false }, { dialogoErrorDatos = false })
+                CuadroDialogo("Error de calculo","Alguno de los datos no ha sido introducido", { dialogoErrorDatos = false }, { dialogoErrorDatos = false })
             }
         }
     }

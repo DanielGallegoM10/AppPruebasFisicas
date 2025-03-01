@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 open class BDDPruebasFisicas(context: Context) :
-    SQLiteOpenHelper(context, "bddPruebasFisicas", null, 1) {
+    SQLiteOpenHelper(context, "bddPruebasFisicas", null, 2) {
 
     private val crearTablaLogin =
         "CREATE TABLE login (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT, pass TEXT)"

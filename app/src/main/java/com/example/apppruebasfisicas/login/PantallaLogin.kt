@@ -43,6 +43,7 @@ fun PantallaLogin(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, navi
         var textoUsuario by rememberSaveable { mutableStateOf("") }
         var textoPass by rememberSaveable { mutableStateOf("") }
         var incorrectoDatos by rememberSaveable { mutableStateOf(false) }
+        var incorrectoCambioPass by rememberSaveable { mutableStateOf(false) }
         var cambiaContrasena by rememberSaveable { mutableStateOf(false) }
         var nuevaContraseña by rememberSaveable { mutableStateOf("") }
 
@@ -77,7 +78,11 @@ fun PantallaLogin(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, navi
         CuadroTextoPass(textoPass, "Introduzca su contraseña") { textoPass = it }
         Spacer(modifier = Modifier.weight(1f))
 
-        Text("¿Ha olvidado su contraseña?", modifier = Modifier.clickable { cambiaContrasena = true }, color = Color.Blue)
+        Text("¿Ha olvidado su contraseña?", modifier = Modifier.clickable {
+            if (textoUsuario.isEmpty()){
+                incorrectoCambioPass = true
+            }else{
+                cambiaContrasena = true }}, color = Color.Blue)
         Spacer(modifier = Modifier.weight(1f))
 
         Boton("Iniciar Sesion") {
@@ -97,7 +102,11 @@ fun PantallaLogin(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, navi
         Spacer(modifier = Modifier.weight(1f))
 
         if(incorrectoDatos){
-            CuadroDialogo("Fallo en el inicio de sesion, los datos son incorrectos", { incorrectoDatos = false }, { incorrectoDatos = false })
+            CuadroDialogo("Error de Inicio de Sesion","Fallo en el inicio de sesion, los datos son incorrectos", { incorrectoDatos = false }, { incorrectoDatos = false })
+        }
+
+        if (incorrectoCambioPass){
+            CuadroDialogo("Error de Cambio de Contraseña", "Debe introducir un usuario para cambiar la contraseña", {incorrectoCambioPass = false}, {incorrectoCambioPass = false})
         }
 
         if (cambiaContrasena){
