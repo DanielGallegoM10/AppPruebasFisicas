@@ -22,6 +22,8 @@ import com.example.apppruebasfisicas.componentes.ListaNotasObtenidas
 import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
+//Pantalla que muestra las notas obtenidas de cada alumno.
+
 @Composable
 fun PantallaMuestraNotas(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, idUsuario: Int, navigateToBack: () -> Unit){
     val context = LocalContext.current

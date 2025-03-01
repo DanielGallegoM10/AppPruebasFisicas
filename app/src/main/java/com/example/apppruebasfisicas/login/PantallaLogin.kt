@@ -37,14 +37,22 @@ import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.LoginObj
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
+//Pantalla de login, permite al usuario iniciar sesión con cualquiera de los usuarios disponibles,
+//asi como también puede cambiar su contraseña.
+
 @Composable
 fun PantallaLogin(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, navigateToPrincipal: (Int) -> Unit){
     Column(Modifier.fillMaxHeight().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
         var textoUsuario by rememberSaveable { mutableStateOf("") }
+
         var textoPass by rememberSaveable { mutableStateOf("") }
+
         var incorrectoDatos by rememberSaveable { mutableStateOf(false) }
+
         var incorrectoCambioPass by rememberSaveable { mutableStateOf(false) }
+
         var cambiaContrasena by rememberSaveable { mutableStateOf(false) }
+
         var nuevaContraseña by rememberSaveable { mutableStateOf("") }
 
         var nombreUsuarioEncontrado by rememberSaveable { mutableStateOf("") }

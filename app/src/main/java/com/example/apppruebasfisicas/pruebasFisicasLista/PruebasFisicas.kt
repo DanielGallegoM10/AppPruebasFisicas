@@ -25,6 +25,10 @@ import com.example.apppruebasfisicas.componentes.ListaDePruebas
 import com.example.apppruebasfisicas.componentes.SearchView
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
+//Pantalla de listado de pruebas fisicas, se muestran en una lista todas las pruebas que el alumno
+//puede realizar, dependiendo de su edad y sexo. Es posible el filtrado de estas pruebas con una
+//barra de busqueda o un menu desplegable de categorias.
+
 @Composable
 fun PruebasFisicasLista(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, edad: Int, navigateToBack: () -> Unit, onItemSelected: (String) -> Unit){
     var busqueda by rememberSaveable { mutableStateOf("") }

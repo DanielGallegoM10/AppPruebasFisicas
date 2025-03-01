@@ -41,7 +41,9 @@ import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.DatosObj
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
-//@Preview(showBackground = true)
+//Pantalla principal de la aplicacion, donde el profesor puede introducir los datos del alumno,
+//calcular su IMC, ver sus notas en las distintas pruebas y acceder al listado de pruebas físicas.
+
 @Composable
 fun PantallaPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, idUsuario: Int, navigateToBack: () -> Unit, navigateToPruebasFisicas: (Int, String, String) -> Unit, navigateToMuestraNotas: (Int) -> Unit) {
     val context = LocalContext.current

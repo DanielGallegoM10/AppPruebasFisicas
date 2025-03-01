@@ -4,6 +4,9 @@ import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 import kotlinx.serialization.Serializable
 
 @Serializable
+object Splash
+
+@Serializable
 object Login
 
 @Serializable

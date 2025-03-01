@@ -31,6 +31,9 @@ import com.example.apppruebasfisicas.componentes.Titulo
 import com.example.apppruebasfisicas.entidades.NotaObj
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
+//Pantalla en la que se calcula la nota de una prueba, el usuario solo debe introducir la marca
+//y pulsar el boton para calcular la nota
+
 @Composable
 fun PantallaDetallePrueba(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit, nombrePrueba: String, nombreAlumno: String, edad: Int, sexo: String, idUsuario: Int, navigateToBack: () -> Unit) {
     var textoMarca by rememberSaveable { mutableStateOf("") }
@@ -44,6 +47,7 @@ fun PantallaDetallePrueba(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Un
     var notaObtenida: NotaObj
 
     var dialogoIncorrecto by rememberSaveable { mutableStateOf(false) }
+
     var dialogoCorrecto by rememberSaveable { mutableStateOf(false) }
 
     val context = LocalContext.current

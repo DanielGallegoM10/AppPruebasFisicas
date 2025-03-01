@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.toRoute
+import com.example.apppruebasfisicas.SplashScreen
 import com.example.apppruebasfisicas.entidades.DatosObj
 import com.example.apppruebasfisicas.entidades.LoginObj
 import com.example.apppruebasfisicas.login.PantallaLogin
@@ -18,18 +19,24 @@ import com.example.apppruebasfisicas.navegacion.Login
 import com.example.apppruebasfisicas.navegacion.MuestraNotas
 import com.example.apppruebasfisicas.navegacion.Principal
 import com.example.apppruebasfisicas.navegacion.PruebasFisicas
+import com.example.apppruebasfisicas.navegacion.Splash
 import com.example.apppruebasfisicas.pantallaDetallePrueba.PantallaDetallePrueba
 import com.example.apppruebasfisicas.pantallaMuestraNotas.PantallaMuestraNotas
 import com.example.apppruebasfisicas.pantallaPrincipal.PantallaPrincipal
 import com.example.apppruebasfisicas.pruebasFisicasLista.PruebasFisicasLista
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
+//Fichero en el que se trata la navegación de toda la app, siendo su punto de partida el splash
+
 @SuppressLint("RestrictedApi")
 @Composable
 fun NavegacionPrincipal(themeMode: ThemeMode, onThemeChange: (ThemeMode) -> Unit) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Login) {
+    NavHost(navController = navController, startDestination = Splash) {
+        composable<Splash> {
+            SplashScreen(navController)
+        }
         composable<Login> {
             PantallaLogin(themeMode, onThemeChange) {
                 idUsuario -> navController.navigate(Principal(themeMode, idUsuario = idUsuario))

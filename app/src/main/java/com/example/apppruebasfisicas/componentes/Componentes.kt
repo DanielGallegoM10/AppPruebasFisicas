@@ -84,6 +84,7 @@ import com.example.apppruebasfisicas.entidades.NotaObj
 import com.example.apppruebasfisicas.entidades.PruebaFisicaObj
 import com.example.apppruebasfisicas.themeSwitch.ThemeMode
 
+//Cuadro de texto, utilizado para poner nombres de usuario u otros datos como edad, peso, marca, etc.
 @Composable
 fun CuadroTexto(
     texto: String,
@@ -109,6 +110,7 @@ fun CuadroTexto(
     )
 }
 
+//Cuadro de texto para contraseñas, solo utilizado en la pantalla de login
 @Composable
 fun CuadroTextoPass(
     texto: String,
@@ -143,6 +145,7 @@ fun CuadroTextoPass(
     )
 }
 
+//Boton utilizado en toda la app, sencillo, solo contiene texto y accion al clicar
 @Composable
 fun Boton(
     texto: String,
@@ -168,7 +171,7 @@ fun Boton(
     }
 }
 
-
+//Titulo utilizado en toda la app, solo contiene texto
 @Composable
 fun Titulo(texto: String) {
     val backgroundColor = MaterialTheme.colorScheme.primary
@@ -202,6 +205,7 @@ fun Titulo(texto: String) {
     }
 }
 
+//Cuadro de dialogo utilizado en toda la app, sobretodo para alertas de error o calculos(IMC y notas)
 @Composable
 fun CuadroDialogo(
     titulo: String,
@@ -227,7 +231,7 @@ fun CuadroDialogo(
     )
 }
 
-
+//Alert Dialog, funcionalidad principal y unica, el cambio de contraseña, usado solamente en el login
 @Composable
 fun DialogoCambiaContrasena(
     usuario: String,
@@ -273,6 +277,7 @@ fun DialogoCambiaContrasena(
     )
 }
 
+//Componente encargado de permitir la selección del sexo del alumno
 @Composable
 fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit) {
     Column(
@@ -311,6 +316,7 @@ fun RadioButtomSexo(texto: String, onItemSelected: (String) -> Unit) {
     }
 }
 
+//Icono de volver, utilizado en toda la app para volver a la pantalla anterior
 @Composable
 fun IconoVolver(navigateToBack: () -> Unit) {
     Icon(
@@ -324,6 +330,7 @@ fun IconoVolver(navigateToBack: () -> Unit) {
     )
 }
 
+//Elemento de la prueba fisica, se utiliza el componente Card.
 @Composable
 fun ElementoPrueba(
     pruebaFisica: PruebaFisicaObj,
@@ -377,6 +384,8 @@ fun ElementoPrueba(
     }
 }
 
+//Recycler View de la lista de pruebas, se destaca la funcionalidad de filtrar las pruebas por categoria
+//y por nombre de prueba.
 @Composable
 fun ListaDePruebas(
     edad: Int,
@@ -419,7 +428,7 @@ fun ListaDePruebas(
     }
 }
 
-
+//Funcion que devielve una lista de pruebas, dependiendo de la edad del alumno
 fun getPruebasFisicas(edad: Int): List<PruebaFisicaObj> {
 
     if (edad <= 13) {
@@ -506,6 +515,8 @@ fun getPruebasFisicas(edad: Int): List<PruebaFisicaObj> {
     }
 }
 
+//Elemento de la nota, se utiliza el componente Card. Se han agregado el uso de "emoticonos" para
+//hacer más visual los textos de la Card.
 @Composable
 fun ElementoNota(nota: NotaObj) {
     Card(
@@ -544,7 +555,7 @@ fun ElementoNota(nota: NotaObj) {
     }
 }
 
-
+//Recycler View de las notas
 @Composable
 fun ListaNotasObtenidas(idUsuario: Int){
     val listaNotas = getNotasObtenidas(idUsuario)
@@ -558,6 +569,8 @@ fun ListaNotasObtenidas(idUsuario: Int){
     }
 }
 
+//Funcion que devuelve una lista de notas, dependiendo del id del usuario
+//Se utiliza el metodo obtenerNotaPorUsuario de la clase NotasHelper
 @Composable
 fun getNotasObtenidas(idUsuario: Int): List<NotaObj>{
     val context = LocalContext.current
@@ -568,6 +581,8 @@ fun getNotasObtenidas(idUsuario: Int): List<NotaObj>{
     return notas
 }
 
+//Barra de busqueda, se utiliza el componente OutlinedTextField, se le pasan como parametros,
+//un texto de busqueda, una lambda que se ejecuta al cambiar el texto de busqueda y un texto de ayuda
 @Composable
 fun SearchView(
     busqueda: String,
@@ -582,7 +597,7 @@ fun SearchView(
         trailingIcon = {
             if (busqueda.isNotEmpty()) {
                 IconButton(onClick = { onQueryChanged("") }) {
-                    Icon(imageVector = Icons.Default.Close, contentDescription = "Borrar búsqueda")
+                    Icon(imageVector = Icons.Default.Close, contentDescription = "Cerrar busqueda")
                 }
             }
         },
@@ -601,7 +616,7 @@ fun SearchView(
     )
 }
 
-
+//Funcion que devuelve una lista de categorias, dependiendo de la edad del alumno
 fun getCategorias(edad: Int): List<String> {
     if (edad <= 13) {
         return listOf("Fuerza Muscular", "Flexibilidad", "Resistencia")
@@ -610,6 +625,8 @@ fun getCategorias(edad: Int): List<String> {
     }
 }
 
+//Componente que permite seleccionar una categoria de la lista de categorias,
+//al seleccionar esta categoria se filtra la lista de pruebas
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 @Composable
 fun DropMenuCategorias(edad: Int, onValueChange: (String) -> Unit) {
@@ -632,7 +649,7 @@ fun DropMenuCategorias(edad: Int, onValueChange: (String) -> Unit) {
             trailingIcon = {
                 Icon(
                     imageVector = if (expanded) Icons.Default.ArrowDropUp else Icons.Default.ArrowDropDown,
-                    contentDescription = "Expandir menú"
+                    contentDescription = "Expandir menu"
                 )
             },
             shape = RoundedCornerShape(12.dp),
@@ -660,12 +677,4 @@ fun DropMenuCategorias(edad: Int, onValueChange: (String) -> Unit) {
             }
         }
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewComponents() {
-//    Titulo("Pagina de Login")
-//    CuadroDialogo("Mensaje de confirmacion", {}, {})
 }
